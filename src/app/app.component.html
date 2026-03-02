@@ -1,0 +1,166 @@
+<header class="main-header sticky-top mb-2 pt-2 pb-2 d-lg-none bg-black shadow" #headerSection
+        [class.header-hidden]="!showHeader"
+>
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <div class="flex-shrink-0">
+        <a routerLink="/">
+          <img src="assets/logo.jpeg"
+               class="img-fluid"
+               alt="Logo"
+               style="width: 70px; height: 70px; object-fit: cover;"/>
+        </a>
+      </div>
+      <div class="flex-grow-1 ms-3 text-light">
+        <div class="fw-bold fs-4"><a class="text-light" routerLink="/">{{environment.APP_NAME}}</a></div>
+        <div class="text-secondary"><a class="text-light" routerLink="/">{{environment.APP_SLOGAN}}</a></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Верхняя навигация для десктопов (скрыта на мобильных) -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top d-none d-lg-flex" style="background-color: #000000;">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/logo.jpeg" alt="Логотип" height="60" class="d-inline-block align-top">
+    </a>
+    <div class="d-flex align-items-center">
+      <div class="flex-grow-1 text-light">
+        <div class="fw-bold fs-4"><a class="text-light" routerLink="/">{{environment.APP_NAME}}</a></div>
+        <div class="text-secondary"><a class="text-light" routerLink="/">{{environment.APP_SLOGAN}}</a></div>
+      </div>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" fragment="tariffs" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}">Тарифы</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" fragment="about" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}">О нас</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" fragment="help" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}">Помощь</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" fragment="faq" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/instruction" routerLinkActive="active">Инструкция</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Нижняя навигация для мобильных (скрыта на десктопах) -->
+<div class="bottom-nav d-lg-none">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}" class="bottom-nav-item">
+    <i class="fas fa-home fa-fw"></i>
+    <span class="bottom-nav-label">Главная</span>
+  </a>
+  <a routerLink="/" fragment="tariffs" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}" class="bottom-nav-item">
+    <i class="fas fa-rocket fa-fw"></i>
+    <span class="bottom-nav-label">Тарифы</span>
+  </a>
+  <a routerLink="/" fragment="about" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}" class="bottom-nav-item">
+    <i class="fas fa-cut fa-fw"></i>
+    <span class="bottom-nav-label">О нас</span>
+  </a>
+  <a routerLink="/" fragment="help" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}" class="bottom-nav-item">
+    <i class="fas fa-info-circle fa-fw"></i>
+    <span class="bottom-nav-label">Помощь</span>
+  </a>
+  <a routerLink="/" fragment="faq" routerLinkActive="active" [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}" class="bottom-nav-item">
+    <i class="fas fa-question-circle fa-fw"></i>
+    <span class="bottom-nav-label">FAQ</span>
+  </a>
+</div>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+
+<footer class="bg-black text-center text-lg-start text-light">
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 ms-3 text-light">
+            <div class="d-flex align-items-center">
+              <img src="assets/logo.jpeg"
+                   class="img-fluid me-3"
+                   alt="Logo"
+                   style="width: 80px; height: 80px; object-fit: cover;"/>
+              <div>
+                <div class="fw-bold fs-4">{{environment.APP_NAME}}</div>
+                <div class="text-secondary">{{environment.APP_SLOGAN}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="text-uppercase">Связь с нами</h5>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2">
+              <i class="fas fa-envelope me-2"></i>
+              <a href="mailto:{{environment.SUPPORT_MAIL}}" class="text-light">{{environment.SUPPORT_MAIL}}</a>
+            </li>
+            <li class="mb-2">
+              <i class="fab fa-telegram-plane me-2"></i>
+              <a href="https://t.me/{{environment.TELEGRAM.SUPPORT_USERNAME}}" target="_blank" class="text-light">&#64;{{environment.TELEGRAM.SUPPORT_USERNAME}}</a>
+            </li>
+          </ul>
+          <p class="mt-4">© {{currentYear}} {{environment.APP_NAME}}. Все права защищены.</p>
+        </div>
+
+        <div class="mt-4">
+          <h5 class="text-uppercase">Способы оплаты</h5>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <img src="assets/img/pay_methods/sbp.svg" alt="СБП" class="me-2" style="height: 60px;">
+            <img src="assets/img/pay_methods/mir.svg" alt="МИР" class="me-2" style="height: 60px;">
+            <img src="assets/img/pay_methods/yoomoney.svg" alt="Yoomoney" class="me-2" style="height: 60px;">
+            <img src="assets/img/pay_methods/paymaster.svg" alt="Paymaster" class="me-2" style="height: 60px;">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0 mt-4">
+        <h5 class="text-uppercase">Документы</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2">
+            <i class="fas fa-book me-2"></i>
+            <a class="text-light cursor-pointer" routerLink="/instruction" routerLinkActive="active">Инструкция</a>
+          </li>
+          <li class="mb-2">
+            <i class="fas fa-shield-alt me-2"></i>
+            <a class="text-light cursor-pointer" routerLink="/privacy-policy" routerLinkActive="active">Политика конфиденциальности</a>
+          </li>
+          <li class="mb-2">
+            <i class="fas fa-cookie-bite me-2"></i>
+            <a class="text-light cursor-pointer" routerLink="/cookies-policy" routerLinkActive="active">Политика в отношении cookie</a>
+          </li>
+          <li class="mb-2">
+            <i class="fas fa-ban me-2"></i>
+            <a class="text-light cursor-pointer" routerLink="/cancel-subscription" routerLinkActive="active">Отмена подписки</a>
+          </li>
+          <li class="mb-2">
+            <i class="fas fa-undo me-2"></i>
+            <a class="text-light cursor-pointer" routerLink="/return-policy" routerLinkActive="active">Политика возврата</a>
+          </li>
+          <li class="mb-2">
+            <i class="fas fa-file-contract me-2"></i>
+            <a class="text-light cursor-pointer" routerLink="/oferta" routerLinkActive="active">Договор оферты</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<app-cookie-consent></app-cookie-consent>

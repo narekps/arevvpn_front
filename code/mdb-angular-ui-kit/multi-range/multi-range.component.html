@@ -1,0 +1,29 @@
+<div class="multi-range-slider">
+  <div
+    *ngIf="highlightRange && numberOfRanges <= 2"
+    class="multi-range-slider-highlighted-range"
+    [style.width.px]="highlightedRangeWidth"
+    [style.left.px]="highlightedRangeLeft"
+  ></div>
+  <span
+    *ngFor="let item of [].constructor(numberOfRanges); let index = index"
+    mdbMultiRangeThumb
+    [startValue]="startValues[index]"
+    class="thumb"
+    #rangeThumb="mdbMultiRangeThumb"
+    tabindex="0"
+  >
+    <!--  -->
+    <div *ngIf="rangeThumb.showTooltip && tooltip" [@fadeIn]>
+      <ng-container
+        *ngTemplateOutlet="tooltipValue; context: { $implicit: val[index] }"
+      ></ng-container>
+    </div>
+  </span>
+
+  <ng-template #tooltipValue let-value>
+    <div class="multi-range-slider-tooltip">
+      <div class="multi-range-slider-tooltip-value">{{ value }}</div>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,454 @@
+<div class="container-fluid bg-black text-white py-0" #topSection>
+  <div class="container">
+    <div class="row align-items-bottom">
+      <!-- Левая колонка: Логотип, название, слоган и кнопка -->
+      <div class="col-lg-6 col-md-6 mb-4 mb-md-0 py-5">
+        <div class="text-center text-md-start">
+          <img src="assets/logo.jpeg"
+               width="200"
+               alt="Логотип"
+               class="mb-4">
+
+          <div class="mb-4">
+            <h1 class="display-3">Быстрый, безопасный и недорогой
+              <span class="text-nowrap bg-success px-2">VPN</span>
+            </h1>
+            <p class="fs-5">{{ environment.APP_NAME }} — {{ environment.APP_SLOGAN }}</p>
+          </div>
+
+          <a routerLink="/" fragment="tariffs" routerLinkActive="active"
+             [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}"
+             class="btn btn-success btn-lg btn-rounded pulse-success-animation"
+             (click)="reachGoalMain(); scrollTo('tariffs');">
+            <i class="fas fa-wifi me-2"></i>
+            Подключить сейчас
+          </a>
+        </div>
+      </div>
+
+      <!-- Правая колонка: Место для картинки -->
+      <div class="col-lg-6 col-md-6 d-flex align-items-end">
+        <div class="text-center w-100">
+          <!-- Здесь будет картинка -->
+          <img src="assets/img/woman-phone.webp"
+               alt="VPN иллюстрация"
+               class="img-fluid rounded"
+               style="max-height: 650px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Блок с тарифами -->
+<div class="container-fluid bg-light py-5" id="tariffs">
+  <p>&nbsp;</p>
+  <p class="d-none d-lg-block">&nbsp;</p>
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-4 fw-bold">Выберите свой тариф</h2>
+      <p class="lead text-muted">Никакой рекламы, быстрая скорость и стабильная работа VPN</p>
+    </div>
+
+    <ng-container *ngIf="tariffs && tariffs.length > 0; else loadingTariffs">
+      <!-- Пробный тариф - отдельная строка -->
+      <div *ngIf="trialTariff" class="row justify-content-center mb-6">
+        <div class="col-lg-10">
+          <div class="card shadow-sm border-0">
+            <div class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+              <div class="text-center text-md-start mb-3 mb-md-0 me-2">
+                <h4 class="fw-bold mb-1">{{ trialTariff.name }}</h4>
+                <p class="text-muted mb-4">{{ trialTariff.description }}</p>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="display-6 fw-bold text-info me-4 text-nowrap">{{ trialTariff.amount | money }}</span>
+                <a [routerLink]="['/booking']" [queryParams]="{ tariffId: trialTariff.id }" class="btn btn-info btn-lg text-nowrap">
+                  <i class="fas fa-gift me-2"></i>
+                  Попробовать
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Основные тарифы -->
+      <div class="row g-4 justify-content-center">
+        <div *ngFor="let tariff of tariffs" class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="card h-100 shadow-sm">
+            <span *ngIf="tariff.isBestseller" class="badge bg-success p-2 position-absolute top-0 start-50 translate-middle">Популярный</span>
+            <span *ngIf="tariff.isProfitable" class="badge bg-primary p-2 position-absolute top-0 start-50 translate-middle">Выгодный</span>
+            <div class="card-body text-center d-flex flex-column">
+              <h3 class="card-title fw-bold mb-3">{{ tariff.name }}</h3>
+              <div class="mb-4">
+              <span class="display-4 fw-bold" [ngClass]="{
+              'text-success': tariff.isBestseller,
+              'text-primary': tariff.isProfitable,
+              'text-muted': !tariff.isBestseller && !tariff.isProfitable
+              }">{{ tariff.amount | money }}</span>
+                <div *ngIf="tariff.durationDays > 31" class="small text-muted">{{ (tariff.amount / (tariff.durationDays / 30)) | money }} / мес.</div>
+              </div>
+              <p class="text-muted mb-4">{{ tariff.description }}</p>
+              <a [routerLink]="['/booking']" [queryParams]="{ tariffId: tariff.id }" class="btn btn-lg mt-auto"
+                 [ngClass]="{
+               'btn-success pulse-success-animation': tariff.isBestseller,
+               'btn-primary': tariff.isProfitable,
+               'btn-secondary': !tariff.isBestseller && !tariff.isProfitable
+               }">
+                Купить
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Placeholder for tariffs -->
+    <ng-template #loadingTariffs>
+      <!-- Placeholder for trial tariff -->
+      <div class="row justify-content-center mb-6">
+        <div class="col-lg-10">
+          <div class="card shadow-sm border-0" aria-hidden="true">
+            <div class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+              <div class="text-center text-md-start mb-3 mb-md-0 me-2 w-50">
+                <h4 class="card-title placeholder-glow"><span class="placeholder col-6"></span></h4>
+                <p class="card-text placeholder-glow"><span class="placeholder col-8"></span></p>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="placeholder-glow me-4"><span class="placeholder" style="width: 120px; height: 48px;"></span></span>
+                <a href="#" tabindex="-1" class="btn btn-info btn-lg disabled placeholder col-4" aria-hidden="true"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placeholder for main tariffs -->
+      <div class="row g-4 justify-content-center">
+        <div *ngFor="let i of [1,2,3,4]" class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+          <div class="card h-100 shadow-sm" aria-hidden="true">
+            <div class="card-body text-center d-flex flex-column">
+              <h3 class="card-title placeholder-glow"><span class="placeholder col-7"></span></h3>
+              <div class="mb-4 placeholder-glow">
+                <span class="placeholder col-5" style="height: 48px"></span>
+                <div class="small placeholder-glow mt-2"><span class="placeholder col-4"></span></div>
+              </div>
+              <p class="card-text placeholder-glow">
+                <span class="placeholder col-12"></span>
+                <span class="placeholder col-8"></span>
+              </p>
+              <a href="#" tabindex="-1" class="btn btn-secondary btn-lg disabled placeholder col-6 mt-auto"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- О нас -->
+<div class="container-fluid bg-dark py-5" id="about">
+  <p>&nbsp;</p>
+  <p class="d-none d-lg-block">&nbsp;</p>
+  <div class="container">
+    <div class="text-center mb-5 text-light">
+      <h2 class="display-4 fw-bold">Почему {{ environment.APP_NAME }}?</h2>
+      <p class="lead text-secondary">{{ environment.APP_SLOGAN }}</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12">
+        <div class="text-light">
+          <div class=" text-center d-flex flex-column">
+            <h1 class="mb-3"><i class="fas fa-shield-alt" style="font-size: 8rem;"></i></h1>
+            <div class="mb-4">
+              <span class="display-4 fw-bold">Безопасность</span>
+            </div>
+            <p class="text-secondary mb-4">Все данные защищены, благодаря стойкому шифрованию</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12">
+        <div class="text-light">
+          <div class=" text-center d-flex flex-column">
+            <h1 class="mb-3"><i class="fas fa-rocket" style="font-size: 8rem;"></i></h1>
+            <div class="mb-4">
+              <span class="display-4 fw-bold">Скорость</span>
+            </div>
+            <p class="text-secondary mb-4">Пропускная способность наших серверов составляет до 10 Гб/сек</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12">
+        <div class="text-light">
+          <div class=" text-center d-flex flex-column">
+            <h1 class="mb-3"><i class="fas fa-infinity" style="font-size: 8rem;"></i></h1>
+            <div class="mb-4">
+              <span class="display-4 fw-bold">Доступность</span>
+            </div>
+            <p class="text-secondary mb-4">Работает на всех устройствах: Android, iOS, Windows, MacOS и Linux</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Как начать -->
+<div class="container-fluid bg-light py-5" id="help">
+  <p>&nbsp;</p>
+  <p class="d-none d-lg-block">&nbsp;</p>
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-4 fw-bold">Как начать пользоваться?</h2>
+      <p class="lead text-muted">Всего 3 простых шага</p>
+    </div>
+
+    <div class="row text-center position-relative how-to-start-steps">
+      <!-- Step 1 -->
+      <div class="col-lg-4 step-item">
+        <div class="d-flex align-items-start d-lg-block">
+          <div class="step-icon-wrapper me-4 me-lg-0 mb-lg-4">
+            <div class="step-icon bg-white shadow-sm">
+              <i class="fas fa-shopping-cart fa-3x text-primary"></i>
+            </div>
+          </div>
+          <div class="text-start text-lg-center">
+            <h3 class="fw-bold h4">1. Оформите подписку</h3>
+            <p class="text-muted px-lg-4">
+              Оплатите подписку на любой
+              <a class="" routerLink="/" fragment="tariffs"
+                 (click)="scrollTo('tariffs');"
+                 routerLinkActive="active"
+                 [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}">тариф</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="col-lg-4 step-item">
+        <div class="d-flex align-items-start d-lg-block">
+          <div class="step-icon-wrapper me-4 me-lg-0 mb-lg-4">
+            <div class="step-icon bg-white shadow-sm">
+              <i class="fas fa-envelope fa-3x text-primary"></i>
+            </div>
+          </div>
+          <div class="text-start text-lg-center">
+            <h3 class="fw-bold h4">2. Получите ключ</h3>
+            <p class="text-muted px-lg-4">Ключ для подключения придет вам на почту сразу после оплаты.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="col-lg-4 step-item">
+        <div class="d-flex align-items-start d-lg-block">
+          <div class="step-icon-wrapper me-4 me-lg-0 mb-lg-4">
+            <div class="step-icon bg-white shadow-sm">
+              <i class="fas fa-mobile-alt fa-3x text-primary"></i>
+            </div>
+          </div>
+          <div class="text-start text-lg-center">
+            <h3 class="fw-bold h4">3. Настройте VPN</h3>
+            <p class="text-muted px-lg-4">Скачайте приложение и добавьте ключ.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <p class="text-muted">
+        Подробнее можно ознакомиться на <a routerLink="/instruction">странице инструкций</a>.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="container-fluid bg-dark py-5" id="faq">
+  <p>&nbsp;</p>
+  <p class="d-none d-lg-block">&nbsp;</p>
+  <div class="container">
+    <div class="text-center mb-5 text-light">
+      <h2 class="display-4 fw-bold">Часто задаваемые вопросы</h2>
+      <p class="lead text-secondary">Здесь вы найдете ответы на самые популярные вопросы.</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <mdb-accordion [multiple]="true">
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">На каких устройствах я могу использовать VPN?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              Наш VPN-сервис работает на всех популярных платформах: Android, iOS, Windows, MacOS, Linux и Smart TV. Вы
+              можете
+              защитить все свои устройства с одной подпиской.
+            </ng-template>
+          </mdb-accordion-item>
+
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">Где расположены Ваши сервера?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              Наши сервера расположены в Европе и СНГ, в странах, дружественных к РФ, что делает риск блокировки
+              минимальным.
+              Кроме того, мы постоянно меняем наши серверы, что делает их блокировку еще менее вероятной.
+            </ng-template>
+          </mdb-accordion-item>
+
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">Сколько устройств можно подключить одновременно?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              Вы можете использовать до 3 устройств одновременно в рамках одной подписки. Этого достаточно для защиты
+              вашего смартфона, ноутбука, телевизора и других гаджетов.
+            </ng-template>
+          </mdb-accordion-item>
+
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">Вы храните логи моих действий?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              Мы придерживаемся строгой политики отсутствия логов (no-logs policy). Мы не отслеживаем, не собираем и не
+              передаем ваши личные данные. Ваша конфиденциальность — наш главный приоритет.
+            </ng-template>
+          </mdb-accordion-item>
+
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">Что делать, если у меня возникнут проблемы?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              Наша служба поддержки работает круглосуточно и без выходных.
+              Вы можете написать нам на почту <a href="mailto:{{environment.SUPPORT_MAIL}}"
+                                                 target="_blank">{{ environment.SUPPORT_MAIL }}</a> или в Telegram через
+              <a href="https://t.me/{{environment.TELEGRAM.SUPPORT_USERNAME}}"
+                 target="_blank">&#64;{{ environment.TELEGRAM.SUPPORT_USERNAME }}</a>.
+              Вы можете связаться с нами через чат на сайте или по электронной почте, и мы поможем решить любой ваш
+              вопрос.
+            </ng-template>
+          </mdb-accordion-item>
+
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">Как продлить подписку?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              Чтобы продлить подписку, выберите нужный тариф и оплатите его, используя ту же почту, что и при первом
+              заказе.
+              Срок действия вашей подписки автоматически увеличится на период, соответствующий выбранному тарифу.
+            </ng-template>
+          </mdb-accordion-item>
+
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">Как отменить подписку?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              Отменить подписку можно по ссылке: /cancel-subscription/ или через команду /renewal (если покупали доступ
+              в Telegram-боте).
+            </ng-template>
+          </mdb-accordion-item>
+
+          <mdb-accordion-item>
+            <ng-template mdbAccordionItemHeader>
+              <strong class="py-2">Подходит ли ваш VPN для роутеров?</strong>
+            </ng-template>
+            <ng-template mdbAccordionItemBody>
+              К сожалению, нет.
+            </ng-template>
+          </mdb-accordion-item>
+        </mdb-accordion>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Text Block -->
+<div class="container-fluid bg-light py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-5">
+          <h2 class="display-5 fw-bold">Пользуйтесь интернетом без риска и ограничений с нашим VPN-сервисом</h2>
+          <p class="lead text-muted">Обеспечение конфиденциальности и свободы в интернете.</p>
+        </div>
+
+        <p class="mb-4">
+          В современном цифровом мире, где ваша онлайн-конфиденциальность находится под угрозой, имеет значение выбрать
+          надежного партнера для защиты ваших данных и обеспечения неограниченного доступа к интернет-ресурсам. Наш VPN
+          обеспечивает высокий уровень безопасности и свободу в интернете, предоставляя вам возможность безопасно и
+          свободно серфить в сети.
+        </p>
+
+        <h3 class="fw-bold h4 mb-4 text-center">Преимущества нашего VPN-сервиса</h3>
+
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <h4 class="fw-bold h5">Высокая скорость и надёжное соединение</h4>
+            <p class="text-muted">
+              Мы понимаем, что быстродействие интернет-соединения является критическим фактором для многих
+              пользователей. Наши серверы работают на высоком уровне производительности, что позволяет вам без проблем
+              смотреть видео, играть в онлайн-игры и скачивать файлы.
+            </p>
+          </div>
+          <div class="col-md-6 mb-4">
+            <h4 class="fw-bold h5">Доверенный поставщик</h4>
+            <p class="text-muted">
+              Наша инфраструктура VPN базируется в одном из самых надежных и защищенных дата-центров в Нидерландах. Этот
+              дата-центр соответствует высоким стандартам безопасности и предоставляет надежную защиту данных наших
+              пользователей. Расположение серверов в этом дата-центре обеспечивает стабильную и быструю работу нашего
+              VPN-сервиса, а также гарантирует конфиденциальность и безопасность ваших онлайн-данных.
+            </p>
+          </div>
+          <div class="col-md-6 mb-4">
+            <h4 class="fw-bold h5">Недорогие тарифы</h4>
+            <p class="text-muted">
+              Мы предоставляем доступ к нашему VPN по выгодным ценам, делая его доступным для всех. Мы считаем, что
+              приватность и безопасность в интернете не должны быть дорогостоящими услугами, и поэтому наша цель —
+              предложить качественный VPN по приемлемым ценам.
+            </p>
+          </div>
+          <div class="col-md-6 mb-4">
+            <h4 class="fw-bold h5">Простота и удобство в использовании</h4>
+            <p class="text-muted">
+              Настройка и соединение с нашими серверами просты и понятны даже для начинающих пользователей. Вы сможете
+              включить наш VPN всего за пару минут, без лишних настроек.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h3 class="fw-bold h4 text-center">Заключение</h3>
+          <p class="text-center text-muted">
+            Обеспечьте свою онлайн-безопасность, получите доступ к мировому контенту и наслаждайтесь быстрой скоростью
+            интернета с нашим надежным VPN-сервисом. Мы гарантируем не только сохранность ваших данных, но и свободу в
+            сети, позволяя вам использовать интернет по своему усмотрению. Выберите наш VPN и оставайтесь защищенными и
+            свободными в онлайне. Начните использовать наш VPN уже сегодня и оцените разницу!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Booking Button -->
+<a routerLink="/" fragment="tariffs" routerLinkActive="active"
+   [routerLinkActiveOptions]="{paths: 'exact',queryParams: 'exact',fragment: 'exact',matrixParams: 'ignored'}"
+   class="btn btn-success btn-rounded pulse-success-animation floating-buy-btn"
+   [class.show]="showFloatingBtn"
+   aria-label="Подключить сейчас"
+   (click)="reachGoalFloat(); scrollTo('tariffs');">
+  <i class="fas fa-wifi me-2"></i>
+  Подключить сейчас
+</a>

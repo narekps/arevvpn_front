@@ -1,0 +1,8 @@
+<div *ngIf="showBanner" class="cookie-consent-banner">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    <p class="mb-2 mb-md-0 me-md-3 text-center text-md-start">
+      Оставаясь на сайте, вы соглашаетесь с <a routerLink="/cookies-policy">Политикой в отношении файлов cookie</a>. Если не согласны, покиньте сайт.
+    </p>
+    <button class="btn btn-primary btn-sm flex-shrink-0" (click)="acceptCookies()">Принять</button>
+  </div>
+</div>

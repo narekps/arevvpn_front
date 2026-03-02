@@ -1,0 +1,15 @@
+<div class="popconfirm-popover shadow-4">
+  <div class="popconfirm">
+    <p class="popconfirm-message">
+      <span class="popconfirm-message-text">{{ message }}</span>
+    </p>
+    <div class="popconfirm-buttons-container">
+      <button (click)="popconfirmRef.close()" type="button" aria-label="Отмена" class="btn btn-secondary btn-sm">
+        Отмена
+      </button>
+      <button (click)="popconfirmRef.confirm()" type="button" aria-label="Подтвердить" class="btn btn-danger btn-sm">
+        ОК
+      </button>
+    </div>
+  </div>
+</div>

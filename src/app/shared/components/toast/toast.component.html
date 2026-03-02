@@ -1,0 +1,22 @@
+<div
+  class="toast toast-{{type}} mx-auto"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+>
+  <div class="toast-header toast-{{type}}">
+    <strong class="me-auto">{{ title }}</strong>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="notificationRef.close()"
+    ></button>
+  </div>
+  <div class="toast-body">{{ message }}</div>
+  <ng-container *ngIf="showButton">
+    <div class="toast-footer p-2 border-top border-2 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" mdbRipple (click)="notificationRef.close(true)">{{buttonText}}</button>
+    </div>
+  </ng-container>
+</div>

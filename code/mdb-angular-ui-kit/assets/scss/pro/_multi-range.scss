@@ -1,0 +1,113 @@
+// Additional MDB Angular styles
+mdb-multi-range {
+  width: 100%;
+  height: 1.5rem;
+  padding: 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+// Additional MDB Angular styles
+
+.multi-range-slider {
+  --#{$prefix}multi-range-slider-focus-box-shadow: #{$form-range-thumb-focus-box-shadow};
+  --#{$prefix}multi-range-slider-height: #{$multi-range-slider-height};
+  --#{$prefix}multi-range-thumb-width: #{$form-range-thumb-width};
+  --#{$prefix}multi-range-thumb-height: #{$form-range-thumb-height};
+  --#{$prefix}multi-range-thumb-bg: #{$form-range-thumb-bg};
+  --#{$prefix}multi-range-thumb-border-radius: #{$form-range-thumb-border-radius};
+  --#{$prefix}multi-range-thumb-transition: #{$form-range-thumb-transition};
+  --#{$prefix}multi-range-thumb-active-bg: #{$form-range-thumb-active-bg};
+  --#{$prefix}multi-range-thumb-border: #{$form-range-thumb-border};
+  --#{$prefix}multi-range-track-bg: #{$form-range-track-bg};
+  --#{$prefix}multi-range-thumb-disabled-bg: #{$form-range-thumb-disabled-bg};
+  --#{$prefix}multi-range-tooltip-value-color: #{$range-thumb-value-color};
+  --#{$prefix}multi-range-tooltip-transition: #{$multi-range-tooltip-transition};
+  --#{$prefix}multi-range-tooltip-border-radius: #{$multi-range-tooltip-border-radius};
+  --#{$prefix}multi-range-tooltip-transform-active: #{$multi-range-tooltip-transform-active};
+  --#{$prefix}multi-range-tooltip-content-size: #{$multi-range-tooltip-content-size};
+  --#{$prefix}multi-range-tooltip-content-transform: #{$multi-range-tooltip-content-transform};
+  --#{$prefix}multi-range-tooltip-content-font-size: #{$multi-range-tooltip-content-font-size};
+  --#{$prefix}multi-range-tooltip-position-top: #{$multi-range-tooltip-position-top};
+  --#{$prefix}multi-range-tooltip-bg: #{$multi-range-tooltip-bg};
+
+  width: 100%;
+  height: var(--#{$prefix}multi-range-slider-height);
+  color: transparent;
+  cursor: pointer;
+  background-color: var(--#{$prefix}multi-range-track-bg);
+  border-color: transparent;
+  position: relative;
+
+  &:focus {
+    box-shadow: var(--#{$prefix}multi-range-slider-focus-box-shadow);
+  }
+}
+
+.multi-range-slider .thumb {
+  width: var(--#{$prefix}multi-range-thumb-width);
+  height: var(--#{$prefix}multi-range-thumb-height);
+  margin-top: -0.45rem;
+  background-color: var(--#{$prefix}multi-range-thumb-bg);
+  border: var(--#{$prefix}multi-range-thumb-border);
+  border-radius: var(--#{$prefix}multi-range-thumb-border-radius);
+  -webkit-transition: var(--#{$prefix}multi-range-thumb-transition);
+  transition: var(--#{$prefix}multi-range-thumb-transition);
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  position: absolute;
+  touch-action: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+.multi-range-slider .thumb-dragging {
+  background-color: var(--#{$prefix}multi-range-thumb-active-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .multi-range-slider .thumb {
+    -moz-transition: none;
+    transition: none;
+  }
+}
+
+.multi-range-slider:disabled {
+  pointer-events: none;
+}
+
+.multi-range-slider:disabled .thumb {
+  background-color: var(--#{$prefix}multi-range-thumb-disabled-bg);
+}
+
+.multi-range-slider-tooltip {
+  position: absolute;
+  top: var(--#{$prefix}multi-range-tooltip-position-top);
+  background-color: var(--#{$prefix}multi-range-tooltip-bg);
+  transform-origin: 50% 50%;
+  border: none;
+  transition: var(--#{$prefix}multi-range-tooltip-transition);
+  border-radius: var(--#{$prefix}multi-range-tooltip-border-radius);
+  transform: var(--#{$prefix}multi-range-tooltip-transform-active);
+
+  &-value {
+    transform: var(--#{$prefix}multi-range-tooltip-content-transform);
+    color: var(--#{$prefix}multi-range-tooltip-value-color);
+    height: var(--#{$prefix}multi-range-tooltip-content-size);
+    font-size: var(--#{$prefix}multi-range-tooltip-content-font-size);
+    display: block;
+    width: var(--#{$prefix}multi-range-tooltip-content-size);
+    text-align: center;
+  }
+}
+
+// Additional MDB Angular styles
+.multi-range-slider-highlighted-range {
+  position: absolute;
+  background-color: $primary;
+  height: var(--#{$prefix}multi-range-slider-height);
+}
+// Additional MDB Angular styles

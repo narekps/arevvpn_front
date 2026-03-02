@@ -1,0 +1,77 @@
+.floating-buy-btn {
+  position: fixed;
+  bottom: 55px;
+  right: 25px;
+  z-index: 1050; // Ensure it's above other content
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  visibility: hidden;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  @media (max-width: 576px) {
+    bottom: 110px;
+    right: 25px;
+  }
+}
+
+
+.how-to-start-steps {
+  .step-icon {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .step-item {
+    position: relative;
+  }
+
+  .step-icon-wrapper {
+    position: relative;
+    flex-shrink: 0; // Предотвращает сжатие иконки
+  }
+
+  /* Вертикальная линия для мобильных устройств */
+  @media (max-width: 991.98px) {
+    .step-item:not(:last-child) .step-icon-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 90px; // Начало под иконкой
+      left: 45px; // Центрирование по иконке
+      width: 2px;
+      height: calc(100% - 60px); // Длина линии
+      background-color: #dee2e6;
+      z-index: 0;
+    }
+
+    .step-item:not(:last-child) {
+      padding-bottom: 1rem;
+      margin-bottom: 0;
+    }
+  }
+
+  /* Горизонтальная линия для больших экранов */
+  @media (min-width: 992px) {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 45px; // Половина высоты .step-icon
+      left: 16.66%; // Начало от центра первой колонки
+      right: 16.66%; // Конец у центра последней колонки
+      height: 2px;
+      background-color: #dee2e6;
+      z-index: 0;
+    }
+  }
+}
