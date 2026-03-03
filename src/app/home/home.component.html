@@ -62,7 +62,10 @@
               </div>
               <div class="d-flex align-items-center">
                 <span class="display-6 fw-bold text-info me-4 text-nowrap">{{ trialTariff.amount | money }}</span>
-                <a [routerLink]="['/booking']" [queryParams]="{ tariffId: trialTariff.id }" class="btn btn-info btn-lg text-nowrap">
+                <a
+                  [routerLink]="['/order']"
+                  [queryParams]="{ tariffId: trialTariff.id }"
+                  class="btn btn-info btn-lg text-nowrap">
                   <i class="fas fa-gift me-2"></i>
                   Попробовать
                 </a>
@@ -86,10 +89,13 @@
               'text-primary': tariff.isProfitable,
               'text-muted': !tariff.isBestseller && !tariff.isProfitable
               }">{{ tariff.amount | money }}</span>
-                <div *ngIf="tariff.durationDays > 31" class="small text-muted">{{ (tariff.amount / (tariff.durationDays / 30)) | money }} / мес.</div>
+                <div *ngIf="tariff.durationMonths > 1" class="small text-muted">{{ (tariff.amount / tariff.durationMonths) | money }} / мес.</div>
               </div>
               <p class="text-muted mb-4">{{ tariff.description }}</p>
-              <a [routerLink]="['/booking']" [queryParams]="{ tariffId: tariff.id }" class="btn btn-lg mt-auto"
+              <a
+                [routerLink]="['/order']"
+                [queryParams]="{ tariffId: tariff.id }"
+                class="btn btn-lg mt-auto"
                  [ngClass]="{
                'btn-success pulse-success-animation': tariff.isBestseller,
                'btn-primary': tariff.isProfitable,
@@ -103,45 +109,66 @@
       </div>
     </ng-container>
 
-    <!-- Placeholder for tariffs -->
+    <!-- Placeholder for tariffs or error message -->
     <ng-template #loadingTariffs>
-      <!-- Placeholder for trial tariff -->
-      <div class="row justify-content-center mb-6">
-        <div class="col-lg-10">
-          <div class="card shadow-sm border-0" aria-hidden="true">
-            <div class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
-              <div class="text-center text-md-start mb-3 mb-md-0 me-2 w-50">
-                <h4 class="card-title placeholder-glow"><span class="placeholder col-6"></span></h4>
-                <p class="card-text placeholder-glow"><span class="placeholder col-8"></span></p>
-              </div>
-              <div class="d-flex align-items-center">
-                <span class="placeholder-glow me-4"><span class="placeholder" style="width: 120px; height: 48px;"></span></span>
-                <a href="#" tabindex="-1" class="btn btn-info btn-lg disabled placeholder col-4" aria-hidden="true"></a>
-              </div>
+      <ng-container *ngIf="loadingError; else showPlaceholder">
+        <div class="alert alert-danger" role="alert">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <i class="fas fa-exclamation-triangle me-2"></i>
+              <strong>Ошибка загрузки</strong>
+              <p class="mb-0 mt-2">Не удалось загрузить список тарифов. Пожалуйста, попробуйте позже.</p>
             </div>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="loadTariffs()">
+              <i class="fas fa-redo me-2"></i>
+              Попробовать снова
+            </button>
           </div>
         </div>
-      </div>
+      </ng-container>
 
-      <!-- Placeholder for main tariffs -->
-      <div class="row g-4 justify-content-center">
-        <div *ngFor="let i of [1,2,3,4]" class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-          <div class="card h-100 shadow-sm" aria-hidden="true">
-            <div class="card-body text-center d-flex flex-column">
-              <h3 class="card-title placeholder-glow"><span class="placeholder col-7"></span></h3>
-              <div class="mb-4 placeholder-glow">
-                <span class="placeholder col-5" style="height: 48px"></span>
-                <div class="small placeholder-glow mt-2"><span class="placeholder col-4"></span></div>
+      <ng-template #showPlaceholder>
+        <!-- Placeholder for trial tariff -->
+        <div class="row justify-content-center mb-6">
+          <div class="col-lg-10">
+            <div class="card shadow-sm border-0" aria-hidden="true">
+              <div class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="text-center text-md-start mb-3 mb-md-0 me-2 w-50">
+                  <h4 class="card-title placeholder-glow"><span class="placeholder col-6"></span></h4>
+                  <p class="card-text placeholder-glow"><span class="placeholder col-8"></span></p>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="placeholder-glow me-4"><span class="placeholder" style="width: 120px; height: 48px;"></span></span>
+                  <a href="#" tabindex="-1" class="btn btn-info btn-lg disabled placeholder col-4" aria-hidden="true"></a>
+                </div>
               </div>
-              <p class="card-text placeholder-glow">
-                <span class="placeholder col-12"></span>
-                <span class="placeholder col-8"></span>
-              </p>
-              <a href="#" tabindex="-1" class="btn btn-secondary btn-lg disabled placeholder col-6 mt-auto"></a>
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- Placeholder for main tariffs -->
+        <div class="row g-4 justify-content-center">
+          <div *ngFor="let i of [1,2,3,4]" class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+            <div class="card h-100 shadow-sm" aria-hidden="true">
+              <div class="card-body text-center d-flex flex-column">
+                <h3 class="card-title placeholder-glow"><span class="placeholder col-7"></span></h3>
+                <div class="mb-4 placeholder-glow">
+                  <span class="placeholder col-5" style="height: 48px"></span>
+                  <div class="small placeholder-glow mt-2"><span class="placeholder col-4"></span></div>
+                </div>
+                <p class="card-text placeholder-glow">
+                  <span class="placeholder col-12"></span>
+                  <span class="placeholder col-8"></span>
+                </p>
+                <a href="#" tabindex="-1" class="btn btn-secondary btn-lg disabled placeholder col-6 mt-auto"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </ng-template>
   </div>
 </div>
@@ -188,7 +215,7 @@
             <div class="mb-4">
               <span class="display-4 fw-bold">Доступность</span>
             </div>
-            <p class="text-secondary mb-4">Работает на всех устройствах: Android, iOS, Windows, MacOS и Linux</p>
+            <p class="text-secondary mb-4">Работает на всех устройствах: Android, iOS, Windows, MacOS, Linux и Smart TV</p>
           </div>
         </div>
       </div>
@@ -298,9 +325,8 @@
               <strong class="py-2">Где расположены Ваши сервера?</strong>
             </ng-template>
             <ng-template mdbAccordionItemBody>
-              Наши сервера расположены в Европе и СНГ, в странах, дружественных к РФ, что делает риск блокировки
-              минимальным.
-              Кроме того, мы постоянно меняем наши серверы, что делает их блокировку еще менее вероятной.
+              Наши сервера расположены в Европе и СНГ, в дружественных странах, что делает риск блокировки минимальным.
+              Кроме того, мы постоянно меняем расположение наших серверов, что делает их блокировку еще менее вероятной.
             </ng-template>
           </mdb-accordion-item>
 

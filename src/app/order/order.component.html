@@ -1,0 +1,248 @@
+<div class="py-5 px-4">
+  <!-- Загрузка тарифа -->
+  <div *ngIf="isLoading" class="d-flex flex-column justify-content-center align-items-center" style="min-height: 400px;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Загрузка...</span>
+    </div>
+    <p class="lead text-muted mt-3">Загрузка информации о тарифе...</p>
+  </div>
+
+  <!-- Загрузка создания заказа -->
+  <div *ngIf="isCreatingOrder" class="d-flex flex-column justify-content-center align-items-center" style="min-height: 400px;">
+    <div class="spinner-border text-success" role="status">
+      <span class="visually-hidden">Создание заказа...</span>
+    </div>
+    <p class="lead text-muted mt-3">Создание заказа...</p>
+    <p class="text-muted small">Пожалуйста, подождите</p>
+  </div>
+
+  <!-- Ошибка -->
+  <div *ngIf="error && !isLoading && !isCreatingOrder" class="alert alert-danger alert-dismissible fade show mx-auto" role="alert" style="max-width: 600px;">
+    <div class="mb-3">{{ error }}</div>
+    <a href="/tariffs" class="btn btn-outline-danger btn-sm">Перейти к тарифам</a>
+    <button type="button" class="btn-close" aria-label="Close" (click)="error = null" style="position: absolute; right: 12px; top: 12px;"></button>
+  </div>
+  <!-- Контент заказа -->
+  <div *ngIf="tariff && !isLoading && !isCreatingOrder" class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <h1 class="mb-5 fw-bold text-center">Оформление покупки</h1>
+
+        <!-- Блок успешного создания заказа -->
+        <div *ngIf="paymentUrl" class="card shadow-lg border-0 mx-auto" style="max-width: 600px;">
+          <div class="card-body text-center p-5">
+            <div class="mb-4">
+              <span class="display-1 text-success"><i class="far fa-check-circle"></i></span>
+            </div>
+            <h3 class="card-title fw-bold mb-3">Заказ успешно создан!</h3>
+            <p class="card-text text-muted mb-4">
+              Для завершения покупки тарифа {{environment.APP_NAME}} <strong>{{ tariff.name }}</strong> необходимо перейти на страницу оплаты.
+            </p>
+            <div class="alert alert-info rounded-3 border-0 mb-4">
+              <small class="d-flex align-items-start text-start">
+                <span class="me-2"><i class="fas fa-info-circle"></i></span>
+                <span>После успешной оплаты ключ доступа и инструкции будут отправлены на указанный email адрес: <strong>{{ orderForm.get('email')?.value }}</strong></span>
+              </small>
+            </div>
+            <a
+              [href]="paymentUrl"
+              class="btn btn-primary btn-lg w-100 fw-bold py-3 fs-6"
+              mdbRipple
+            >
+              <span class="me-2"><i class="far fa-credit-card"></i></span>
+              Перейти к оплате
+            </a>
+          </div>
+        </div>
+
+        <!-- Форма заказа (показывается только если нет paymentUrl) -->
+        <form *ngIf="!paymentUrl" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+          <div class="row g-4" style="display: flex; align-items: stretch;">
+            <!-- ЛЕВАЯ КОЛОНКА: Контактные данные и Тариф -->
+            <div class="col-lg-6" style="display: flex; flex-direction: column;">
+              <!-- БЛОК 1: Информация о выбранном тарифе -->
+              <div class="card shadow-lg border-0 mb-4">
+                <div class="card-header py-3">
+                  <h5 class="card-title mb-0 fw-bold">Выбранный тариф</h5>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="me-2">
+                      <h6 class="card-title fw-bold mb-1">{{ tariff.name }}</h6>
+                      <p class="card-text text-muted small mb-0">{{ tariff.description }}</p>
+                    </div>
+                    <div class="text-end">
+                      <div class="h4 text-primary text-nowrap fw-bold mb-0">{{ tariff.amount | money:tariff.currency }}</div>
+                    </div>
+                  </div>
+
+                  <hr class="my-3">
+
+                  <div class="row g-2">
+                    <div class="col-12">
+                      <div class="d-flex align-items-center">
+                        <span class="badge bg-info me-2"><i class="far fa-clock"></i>️</span>
+                        <div>
+                          <small class="text-muted me-1">Длительность:</small>
+                          <strong *ngIf="!tariff.isTrial">{{ tariff.durationMonths }} {{ getMonthWord(tariff.durationMonths) }}</strong>
+                          <strong *ngIf="tariff.isTrial">{{environment.TRIAL_PERIOD_DAYS}} дней</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- БЛОК 2: Форма для ввода E-mail -->
+              <div class="card shadow-lg border-0" style="flex: 1; display: flex; flex-direction: column;">
+                <div class="card-header py-3">
+                  <h5 class="card-title mb-0 fw-bold">Контактные данные</h5>
+                </div>
+                <div class="card-body" style="flex: 1; display: flex; flex-direction: column;">
+                  <p class="text-muted small mb-4">На указанный адрес мы отправим ключ доступа и инструкции</p>
+
+                  <!-- Email поле 1 -->
+                  <mdb-form-control class="mb-4">
+                    <input
+                      mdbInput
+                      type="email"
+                      id="email"
+                      class="form-control"
+                      formControlName="email"
+                      placeholder=" "
+                      [class.is-invalid]="orderForm.get('email')?.invalid && orderForm.get('email')?.touched"
+                    >
+                    <label mdbLabel class="form-label" for="email">E-mail адрес</label>
+                    <div class="invalid-feedback d-block" *ngIf="orderForm.get('email')?.invalid && orderForm.get('email')?.touched">
+                      <small *ngIf="orderForm.get('email')?.errors?.['required']">
+                        Email адрес обязателен
+                      </small>
+                      <small *ngIf="orderForm.get('email')?.errors?.['email']">
+                        Введите корректный email адрес
+                      </small>
+                    </div>
+                  </mdb-form-control>
+
+                  <!-- Email поле 2 (подтверждение) -->
+                  <mdb-form-control class="mb-0">
+                    <input
+                      mdbInput
+                      type="email"
+                      id="emailConfirm"
+                      class="form-control"
+                      formControlName="emailConfirm"
+                      placeholder=" "
+                      [class.is-invalid]="(orderForm.get('emailConfirm')?.invalid || orderForm.errors?.['emailMismatch']) && orderForm.get('emailConfirm')?.touched"
+                    >
+                    <label mdbLabel class="form-label" for="emailConfirm">Подтвердите E-mail адрес</label>
+                    <div class="invalid-feedback d-block" *ngIf="(orderForm.get('emailConfirm')?.invalid || orderForm.errors?.['emailMismatch']) && orderForm.get('emailConfirm')?.touched">
+                      <small *ngIf="orderForm.get('emailConfirm')?.errors?.['required']">
+                        Подтверждение email адреса обязательно
+                      </small>
+                      <small *ngIf="orderForm.get('emailConfirm')?.errors?.['email']">
+                        Введите корректный email адрес
+                      </small>
+                      <small *ngIf="orderForm.errors?.['emailMismatch']">
+                        Email адреса не совпадают
+                      </small>
+                    </div>
+                  </mdb-form-control>
+
+                  <!-- Информационный блок -->
+                  <div class="alert alert-info mt-4 rounded-3 border-0">
+                    <small class="d-flex align-items-center">
+                      <span class="me-2"><i class="fas fa-info-circle"></i></span>
+                      <span>После оплаты вы сразу получите доступ к сервису и все необходимые инструкции на указанный email адрес</span>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ПРАВАЯ КОЛОНКА: Способ оплаты -->
+            <div class="col-lg-6" style="display: flex; flex-direction: column;">
+
+              <!-- БЛОК 3: Способ оплаты и Согласие -->
+              <div class="card shadow-lg border-0" style="flex: 1; display: flex; flex-direction: column;">
+                <div class="card-header py-3">
+                  <h5 class="card-title mb-0 fw-bold">Способ оплаты</h5>
+                </div>
+                <div class="card-body" style="flex: 1; display: flex; flex-direction: column;">
+                  <!-- Способ оплаты -->
+                  <div class="payment-methods mb-4">
+                    <div class="form-check">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        id="cardPayment"
+                        name="paymentMethod"
+                        value="1"
+                        [checked]="orderForm.get('paymentMethod')?.value === '1'"
+                        formControlName="paymentMethod"
+                        mdbRadio
+                      >
+                      <label class="form-check-label" for="cardPayment">
+                        <span class="fw-semibold"><i class="far fa-credit-card"></i> Онлайн картой</span>
+                        <small class="d-block text-muted">Безопасная оплата по карте Visa, Mastercard, МИР</small>
+                      </label>
+                    </div>
+                  </div>
+
+                  <hr class="my-4">
+
+                  <!-- Согласие с условиями -->
+                  <div class="agreement-section mb-4">
+                    <div class="form-check">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="agreeToTerms"
+                        formControlName="agreeToTerms"
+                        mdbCheckbox
+                      >
+                      <label class="form-check-label" for="agreeToTerms">
+                        Я соглашаюсь с <a href="/privacy-policy" target="_blank" class="text-decoration-none">политикой обработки персональных данных</a> и <a href="/oferta" target="_blank" class="text-decoration-none">договором оферты</a>, включая условия подключения к системе регулярных платежей.
+                      </label>
+                    </div>
+                    <small class="d-block text-danger mt-2" *ngIf="orderForm.get('agreeToTerms')?.invalid && orderForm.get('agreeToTerms')?.touched">
+                      Вы должны согласиться с условиями для продолжения
+                    </small>
+                  </div>
+
+                  <!-- Контейнер капчи -->
+                  <div *ngIf="CAPTCHA_ENABLED" id="captcha-container" style="height: 100px; min-height: 100px;"
+                       class="smart-captcha mb-3 position-relative">
+                    <!-- Лоадер капчи -->
+                    <div *ngIf="!captchaLoaded" class="captcha-loader d-flex justify-content-center align-items-center h-100">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Загрузка капчи...</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Кнопка оплаты -->
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-100 fw-bold py-3 fs-6"
+                    [disabled]="orderForm.invalid || !isCaptchaCompleted() || isCreatingOrder"
+                    mdbRipple
+                  >
+                    <span *ngIf="!isCreatingOrder">
+                      <span class="me-2">💰</span>
+                      Перейти к оплате
+                    </span>
+                    <span *ngIf="isCreatingOrder" class="d-flex align-items-center justify-content-center">
+                      <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                      Создание заказа...
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
