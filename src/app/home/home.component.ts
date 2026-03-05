@@ -48,6 +48,7 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   public isLoading: boolean = false;
   public tariffs: Tariff[] = [];
   public trialTariff: Tariff | undefined;
+  public loadingError: boolean = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -103,11 +104,20 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
 
   loadTariffs(): void {
     this.isLoading = true;
+    this.loadingError = false;
 
-    this.tariffService.getList().subscribe((response: ListResponse) => {
-      this.isLoading = false;
-      this.trialTariff = response.tariffs.find(t => t.isTrial);
-      this.tariffs = response.tariffs.filter(t => !t.isTrial);
+    this.tariffService.getList().subscribe({
+      next: (response: ListResponse) => {
+        this.isLoading = false;
+        this.loadingError = false;
+        this.trialTariff = response.tariffs.find(t => t.isTrial);
+        this.tariffs = response.tariffs.filter(t => !t.isTrial);
+      },
+      error: (err) => {
+        console.error('Error loading tariffs:', err);
+        this.isLoading = false;
+        this.loadingError = true;
+      }
     });
   }
 }

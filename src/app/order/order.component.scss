@@ -1,0 +1,54 @@
+// Стили для карточек с эффектами
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0.75rem;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+.card-header {
+  border-radius: 0.75rem 0.75rem 0 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+// Стили для способов оплаты
+.payment-methods {
+  .form-check {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    &:hover {
+      background-color: #f8f9fa;
+      border-color: #007bff;
+    }
+    input:checked ~ label {
+      color: #007bff;
+      font-weight: 600;
+    }
+  }
+}
+// Стили для соглашения
+.agreement-section {
+  .form-check {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: #f8f9fa;
+    }
+    label {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      a {
+        color: #007bff;
+        text-decoration: underline !important;
+        &:hover {
+          color: #0056b3;
+        }
+      }
+    }
+  }
+}

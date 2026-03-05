@@ -24,7 +24,7 @@ export class TariffService {
         return new GetResponse(resp);
       }),
       catchError(error => {
-        console.error('Error fetching invite:', error);
+        console.error('Error fetching tariff:', error);
         return throwError(() => error);
       })
     );
@@ -36,6 +36,10 @@ export class TariffService {
       map((resp: ListResponse) => {
         return new ListResponse(resp);
       }),
+      catchError(error => {
+        console.error('Error fetching tariff list:', error);
+        return throwError(() => error);
+      })
     );
   }
 }

@@ -75,3 +75,14 @@
     }
   }
 }
+
+#tariffs {
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0.75rem;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+  }
+}

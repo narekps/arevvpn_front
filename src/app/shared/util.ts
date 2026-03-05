@@ -22,3 +22,23 @@ export function getDayWord(count: number): string {
 
   return 'дней';
 }
+
+export function getMonthWord(count: number): string {
+  const normalizedCount = Math.abs(count);
+  const lastDigit = normalizedCount % 10;
+  const lastTwoDigits = normalizedCount % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+    return 'месяцев';
+  }
+
+  if (lastDigit === 1) {
+    return 'месяц';
+  }
+
+  if (lastDigit >= 2 && lastDigit <= 4) {
+    return 'месяца';
+  }
+
+  return 'месяцев';
+}

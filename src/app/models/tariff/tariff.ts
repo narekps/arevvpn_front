@@ -2,7 +2,7 @@ export class Tariff {
   id: string;
   name: string;
   description: string;
-  durationDays: number;
+  durationMonths: number;
   amount: number;
   currency: string;
   isActive: boolean;
@@ -14,7 +14,7 @@ export class Tariff {
     this.id = data.id;
     this.name = data.name;
     this.description = data.description;
-    this.durationDays = data.durationDays;
+    this.durationMonths = data.durationMonths;
     this.amount = data.amount;
     this.currency = data.currency;
     this.isActive = data.isActive;
