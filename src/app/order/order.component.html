@@ -24,7 +24,36 @@
   </div>
   <!-- Контент заказа -->
   <div *ngIf="tariff && !isLoading && !isCreatingOrder" class="container">
-    <div class="row">
+    <!-- Блок для пробного тарифа -->
+    <div *ngIf="tariff.isTrial" class="row">
+      <div class="col-lg-6 mx-auto">
+        <div class="alert alert-info fade show mx-auto" role="alert" >
+          <div class="mb-4">
+            <h4 class="alert-heading fw-bold mb-3">
+              <i class="fas fa-info-circle me-2"></i>
+              Пробный доступ
+            </h4>
+            <p class="mb-3">
+              Для получения пробного доступа к {{ environment.APP_NAME }} на {{ environment.TRIAL_PERIOD_DAYS }} дней,
+              пожалуйста, воспользуйтесь нашим Telegram ботом.
+            </p>
+            <a
+              [href]="getTelegramBotLink()"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-info btn-lg fw-bold py-3 fs-6 w-100 mb-3"
+              mdbRipple>
+              <i class="fab fa-telegram text-white me-2"></i>
+              Получить доступ
+            </a>
+          </div>
+          <a href="/tariffs" class="btn btn-outline-info btn-sm">Вернуться к тарифам</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Форма заказа (показывается только для платных тарифов) -->
+    <div *ngIf="!tariff.isTrial" class="row">
       <div class="col-lg-10 mx-auto">
         <h1 class="mb-5 fw-bold text-center">Оформление покупки</h1>
 
@@ -245,4 +274,3 @@
     </div>
   </div>
 </div>
-
