@@ -8,14 +8,14 @@ import {CancelSubscriptionComponent} from "./page/cancel-subscription/cancel-sub
 import {CookiesPolicyComponent} from "./page/cookies-policy/cookies-policy.component";
 import {PrivacyPolicyComponent} from "./page/privacy-policy/privacy-policy.component";
 import {OrderComponent} from "./order/order.component";
-import {SuccessComponent} from "./order/success/success.component";
+import {CallbackComponent} from "./order/callback/callback.component";
 import {environment} from "../environments/environment";
 
 const routes: Routes = [
   {path: '', component: HomeComponent, title: environment.APP_NAME+' - Вечная связь. Без границ.'},
   {path: 'instruction', component: InstructionComponent, title: 'Инструкция по подключению - '+environment.APP_NAME},
   {path: 'order', component: OrderComponent, title: 'Оформление покупки - '+environment.APP_NAME},
-  {path: 'order/success', component: SuccessComponent, title: 'Оплата завершена - '+environment.APP_NAME},
+  {path: 'order/callback', component: CallbackComponent, title: 'Активация подписки - '+environment.APP_NAME},
   {path: 'oferta', component: OfertaComponent, title: 'Договор оферты - '+environment.APP_NAME},
   {path: 'return-policy', component: ReturnPolicyComponent, title: 'Политика возврата - '+environment.APP_NAME},
   {path: 'cancel-subscription', component: CancelSubscriptionComponent, title: 'Отмена подписки - '+environment.APP_NAME},

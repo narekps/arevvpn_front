@@ -131,6 +131,8 @@ export class OrderComponent implements OnInit, OnDestroy {
       return;
     }
 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // Проверяем токен через callback или через getResponse()
     let captchaToken = this.captchaToken;
 
@@ -139,6 +141,7 @@ export class OrderComponent implements OnInit, OnDestroy {
       captchaToken = this.captchaService.getResponse(this.CAPTCHA_CONTAINER_ID);
     }
 
+    // Проверяем наличие капчи, если она включена
     if (environment.CAPTCHA_ENABLED && !captchaToken) {
       if (this.notificationRef) {
         this.notificationRef.close()
@@ -174,16 +177,25 @@ export class OrderComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           console.log('Order created successfully:', response);
-          this.isCreatingOrder = false;
           this.paymentUrl = response.url;
+          window.location.href = this.paymentUrl;
         },
         error: (err) => {
           console.error('Error creating order:', err);
           this.error = 'Ошибка при создании заказа. Пожалуйста, попробуйте позже.';
           this.isCreatingOrder = false;
-          // Сбрасываем капчу при ошибке
-          this.captchaToken = null;
-          this.captchaService.reset(this.CAPTCHA_CONTAINER_ID);
+
+          // Перерендеровываем капчу при ошибке чтобы пользователь мог пройти ее еще раз
+          if (environment.CAPTCHA_ENABLED) {
+            this.captchaToken = null;
+            // Уничтожаем старую капчу
+            this.captchaService.destroy(this.CAPTCHA_CONTAINER_ID);
+            // Небольшая задержка для того чтобы DOM обновился
+            setTimeout(() => {
+              // Перерендеровываем капчу
+              this.initCaptcha();
+            }, 500);
+          }
         }
       });
   }
@@ -199,13 +211,17 @@ export class OrderComponent implements OnInit, OnDestroy {
     if (!environment.CAPTCHA_ENABLED) {
       return;
     }
+
+    // Привязываем контекст для callback функции
+    const onSuccess = this.onCaptchaSuccess.bind(this);
+
     this.captchaService.render({
       siteKey: environment.CAPTCHA_SITEKEY,
       containerId: this.CAPTCHA_CONTAINER_ID,
       invisible: false,
       hideShield: true,
       shieldPosition: 'top-left',
-      callback: this.onCaptchaSuccess
+      callback: onSuccess
     }).subscribe({
       next: () => {
         this.captchaLoaded = true;

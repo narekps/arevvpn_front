@@ -56,34 +56,6 @@
     <div *ngIf="!tariff.isTrial" class="row">
       <div class="col-lg-10 mx-auto">
         <h1 class="mb-5 fw-bold text-center">Оформление покупки</h1>
-
-        <!-- Блок успешного создания заказа -->
-        <div *ngIf="paymentUrl" class="card shadow-lg border-0 mx-auto" style="max-width: 600px;">
-          <div class="card-body text-center p-5">
-            <div class="mb-4">
-              <span class="display-1 text-success"><i class="far fa-check-circle"></i></span>
-            </div>
-            <h3 class="card-title fw-bold mb-3">Заказ успешно создан!</h3>
-            <p class="card-text text-muted mb-4">
-              Для завершения покупки тарифа {{environment.APP_NAME}} <strong>{{ tariff.name }}</strong> необходимо перейти на страницу оплаты.
-            </p>
-            <div class="alert alert-info rounded-3 border-0 mb-4">
-              <small class="d-flex align-items-start text-start">
-                <span class="me-2"><i class="fas fa-info-circle"></i></span>
-                <span>После успешной оплаты ключ доступа и инструкции будут отправлены на указанный email адрес: <strong>{{ orderForm.get('email')?.value }}</strong></span>
-              </small>
-            </div>
-            <a
-              [href]="paymentUrl"
-              class="btn btn-primary btn-lg w-100 fw-bold py-3 fs-6"
-              mdbRipple
-            >
-              <span class="me-2"><i class="far fa-credit-card"></i></span>
-              Перейти к оплате
-            </a>
-          </div>
-        </div>
-
         <!-- Форма заказа (показывается только если нет paymentUrl) -->
         <form *ngIf="!paymentUrl" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
           <div class="row g-4" style="display: flex; align-items: stretch;">
@@ -211,8 +183,8 @@
                         mdbRadio
                       >
                       <label class="form-check-label" for="cardPayment">
-                        <span class="fw-semibold"><i class="far fa-credit-card"></i> Онлайн картой</span>
-                        <small class="d-block text-muted">Безопасная оплата по карте Visa, Mastercard, МИР</small>
+                        <span class="fw-semibold"><img src="assets/img/yookassa.png"> ЮKassa</span>
+                        <small class="d-block text-muted">Безопасная оплата по карте, СБП, SberPay, T-Pay и ЮMoney</small>
                       </label>
                     </div>
                   </div>
