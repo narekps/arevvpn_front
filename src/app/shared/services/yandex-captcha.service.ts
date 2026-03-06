@@ -164,6 +164,7 @@ export class YandexCaptchaService {
     if (widgetId && typeof (window as any).smartCaptcha !== 'undefined') {
       try {
         (window as any).smartCaptcha.reset(widgetId);
+        console.log('captcha reset successfully for container:', containerId);
       } catch (error) {
         console.error('Error resetting captcha:', error);
       }

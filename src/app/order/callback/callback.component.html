@@ -1,0 +1,138 @@
+<div class="py-5 px-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+
+        <!-- Загрузка -->
+        <div *ngIf="isLoading" class="d-flex flex-column justify-content-center align-items-center" style="min-height: 400px;">
+          <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Загрузка...</span>
+          </div>
+          <p class="lead text-muted mt-3">Активация подписки...</p>
+          <p class="text-muted small">Пожалуйста, подождите</p>
+        </div>
+
+        <!-- Ошибка -->
+        <div *ngIf="error && !isLoading" class="text-center">
+          <div class="card shadow-lg border-0 mx-auto" style="max-width: 600px;">
+            <div class="card-body p-5">
+              <div class="mb-4">
+                <span class="display-1 text-danger"><i class="fas fa-times"></i></span>
+              </div>
+              <h3 class="card-title fw-bold mb-3 text-danger">Ошибка активации</h3>
+              <p class="card-text text-muted mb-4">{{ error }}</p>
+              <a class="btn btn-primary btn-lg px-5" routerLink="/">
+                Перейти на главную
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Успех - платеж прошел -->
+        <div *ngIf="isPaymentSucceeded() && !isLoading && !error" class="text-center">
+          <div class="card shadow-lg border-0 mx-auto" style="max-width: 600px;">
+            <div class="card-body p-5">
+              <div class="mb-4">
+                <span class="display-1 text-success"><i class="far fa-check-circle"></i></span>
+              </div>
+              <h3 class="card-title fw-bold mb-3 text-success">Подписка успешно активирована!</h3>
+              <p class="card-text text-muted mb-4">
+                Ваш ключ доступа:
+              </p>
+              <div class="bg-light p-3 rounded-2 mb-4 border">
+                <a [href]="subscriptionUrl" target="_blank" class="text-decoration-none text-primary">
+                  <code class="text-break">{{ subscriptionUrl }}</code>
+                </a>
+              </div>
+              <div class="alert alert-info rounded-3 border-0 mb-4">
+                <small class="d-flex align-items-start text-start">
+                  <span class="me-2"><i class="fas fa-info-circle"></i></span>
+                  <span>Инструкция по подключению отправлена на ваш email адрес.</span>
+                </small>
+              </div>
+              <a class="btn btn-primary btn-lg px-5" [href]="subscriptionUrl">
+                Перейти на подписку
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Платеж отклонен -->
+        <div *ngIf="isPaymentCanceled() && !isLoading && !error" class="text-center">
+          <div class="card shadow-lg border-0 mx-auto" style="max-width: 600px;">
+            <div class="card-body p-5">
+              <div class="mb-4">
+                <span class="display-1 text-danger"><i class="fas fa-times-circle"></i></span>
+              </div>
+              <h3 class="card-title fw-bold mb-3 text-danger">Платеж отклонен</h3>
+              <p class="card-text text-muted mb-4">
+                К сожалению, ваш платеж был отклонен. Это могло произойти по следующим причинам:
+              </p>
+              <ul class="text-start text-muted mb-4">
+                <li>Недостаточно средств на карте</li>
+                <li>Отклонение банком</li>
+                <li>Отмена платежа клиентом</li>
+                <li>Технические проблемы при обработке</li>
+              </ul>
+              <div class="alert alert-warning rounded-3 border-0 mb-4">
+                <small class="d-flex align-items-start text-start">
+                  <span class="me-2"><i class="fas fa-exclamation-triangle"></i></span>
+                  <span>Если средства были списаны с вашей карты, они будут возвращены в течение 3-5 рабочих дней.</span>
+                </small>
+              </div>
+              <div class="d-grid gap-2">
+                <a class="btn btn-primary btn-lg"
+                   routerLink="/" fragment="tariffs">
+                   Попробовать снова
+                </a>
+
+                <a class="btn btn-outline-secondary" routerLink="/">
+                  Перейти на главную
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Платеж в обработке -->
+        <div *ngIf="isPaymentPending() && !isLoading && !error" class="text-center">
+          <div class="card shadow-lg border-0 mx-auto" style="max-width: 600px;">
+            <div class="card-body p-5">
+              <div class="mb-4">
+                <span class="display-1 text-warning"><i class="fas fa-clock"></i></span>
+              </div>
+              <h3 class="card-title fw-bold mb-3 text-warning">Платеж в обработке</h3>
+              <p class="card-text text-muted mb-4">
+                Ваш платеж находится в обработке. Это может занять несколько минут.
+              </p>
+              <div class="alert alert-warning rounded-3 border-0 mb-4">
+                <small class="d-flex align-items-start text-start">
+                  <span class="me-2"><i class="fas fa-exclamation-triangle"></i></span>
+                  <span><strong>Важно!</strong> Не закрывайте эту страницу. Попробуйте обновить её через несколько минут.</span>
+                </small>
+              </div>
+              <div class="alert alert-danger rounded-3 border-0 mb-4">
+                <small class="d-flex align-items-start text-start">
+                  <span class="me-2"><i class="fas fa-info-circle"></i></span>
+                  <span>Если вы закроете страницу, платеж может потеряться и вам потребуется связаться со службой поддержки для активации подписки.</span>
+                </small>
+              </div>
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary btn-lg" (click)="activateSubscription()">
+                  <i class="fas fa-sync-alt me-2"></i>
+                  Обновить страницу
+                </button>
+                <div class="text-muted small mt-3">
+                  <i class="fas fa-spinner fa-spin me-2"></i>
+                  Ожидание завершения платежа...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

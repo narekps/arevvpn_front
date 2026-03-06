@@ -6,10 +6,9 @@ import { environment } from '../../environments/environment';
 import {
   CreateOrderRequest,
   CreateOrderResponse,
-  OrderSuccessRequest,
-  OrderSuccessResponse,
+  OrderCallbackRequest,
+  OrderCallbackResponse,
 } from '../models/order/order-data.interface';
-import {GetResponse} from "../models/tariff/get-response";
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +35,13 @@ export class OrderService {
   }
 
   /**
-   * Активация подписки после успешной оплаты
+   * Активация подписки после оплаты
    */
-  success(req: OrderSuccessRequest): Observable<OrderSuccessResponse> {
-    const url = `${this.API_URL}/api/v1/order/success`;
-    return this.http.post<OrderSuccessResponse>(url, req).pipe(
-      map((resp: OrderSuccessResponse) => {
-        return new OrderSuccessResponse(resp);
+  callback(req: OrderCallbackRequest): Observable<OrderCallbackResponse> {
+    const url = `${this.API_URL}/api/v1/order/callback`;
+    return this.http.post<OrderCallbackResponse>(url, req).pipe(
+      map((resp: OrderCallbackResponse) => {
+        return new OrderCallbackResponse(resp);
       }),
       catchError(error => {
         console.error('Error activating order:', error);

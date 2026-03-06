@@ -22,20 +22,20 @@ export class CreateOrderResponse {
   }
 }
 
-export class OrderSuccessRequest {
+export class OrderCallbackRequest {
   paymentId: string;
 
-  constructor(data: OrderSuccessRequest) {
+  constructor(data: OrderCallbackRequest) {
     this.paymentId = data.paymentId;
   }
 }
 
-export class OrderSuccessResponse {
-  success: boolean;
+export class OrderCallbackResponse {
   subscriptionUrl: string;
+  paymentStatus: 'pending' | 'waiting_for_capture' | 'succeeded' | 'canceled';
 
-  constructor(data: OrderSuccessResponse) {
-    this.success = data.success;
+  constructor(data: OrderCallbackResponse) {
     this.subscriptionUrl = data.subscriptionUrl;
+    this.paymentStatus = data.paymentStatus;
   }
 }
