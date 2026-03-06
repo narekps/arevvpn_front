@@ -56,6 +56,13 @@ export class CallbackComponent implements OnInit, OnDestroy {
         next: (response) => {
           this.subscriptionUrl = response.subscriptionUrl;
           this.paymentStatus = response.paymentStatus;
+
+          // Если платеж успешен, перенаправляем пользователя по ссылке подписки
+          if (response.paymentStatus === 'succeeded' && response.subscriptionUrl) {
+            window.location.href = `${response.subscriptionUrl}?callback=true`;
+            return;
+          }
+
           this.isLoading = false;
         },
         error: (err) => {
