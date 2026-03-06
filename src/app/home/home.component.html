@@ -63,11 +63,12 @@
               <div class="d-flex align-items-center">
                 <span class="display-6 fw-bold text-info me-4 text-nowrap">{{ trialTariff.amount | money }}</span>
                 <a
-                  [routerLink]="['/order']"
-                  [queryParams]="{ tariffId: trialTariff.id }"
+                  [href]="getTelegramBotLink()"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="btn btn-info btn-lg text-nowrap">
-                  <i class="fas fa-gift me-2"></i>
-                  Попробовать
+                  <i class="fab fa-telegram me-2"></i>
+                  Получить доступ
                 </a>
               </div>
             </div>

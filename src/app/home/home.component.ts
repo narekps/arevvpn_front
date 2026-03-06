@@ -102,6 +102,10 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
+  getTelegramBotLink(): string {
+    return `https://t.me/${this.environment.TELEGRAM.BOT_NAME}`;
+  }
+
   loadTariffs(): void {
     this.isLoading = true;
     this.loadingError = false;

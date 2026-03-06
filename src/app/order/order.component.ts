@@ -83,6 +83,10 @@ export class OrderComponent implements OnInit, OnDestroy {
     return getMonthWord(count);
   }
 
+  getTelegramBotLink(): string {
+    return `https://t.me/${this.environment.TELEGRAM.BOT_NAME}`;
+  }
+
   ngOnInit(): void {
     this.route.queryParams
       .pipe(takeUntil(this.destroy$))
