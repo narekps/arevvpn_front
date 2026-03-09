@@ -1,0 +1,23 @@
+.smart-captcha {
+  min-height: 100px;
+}
+
+.captcha-loader {
+  min-height: 100px;
+}
+
+/* Размер и центрирование формы задаются через grid-классы в шаблоне. */
+
+.cancel-submit-btn {
+  min-width: 220px;
+}
+
+@media (max-width: 767.98px) {
+  .cancel-submit-btn {
+    width: 100%;
+  }
+
+  .display-5 {
+    font-size: 2rem;
+  }
+}

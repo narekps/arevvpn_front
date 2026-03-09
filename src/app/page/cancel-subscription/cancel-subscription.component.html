@@ -8,7 +8,68 @@
 
       <p>Если у вас возникли сложности с настройкой VPN или наши тарифы кажутся вам слишком высокими, напишите нам. Мы поможем разобраться с настройками и предложим подходящий вариант.</p>
 
-      <p>Свяжитесь с нами по почте <a href="mailto:{{environment.SUPPORT_MAIL}}">{{environment.SUPPORT_MAIL}}</a> или через Telegram <a href="https://t.me/{{environment.TELEGRAM.SUPPORT_USERNAME}}" target="_blank">&commat;{{environment.TELEGRAM.SUPPORT_USERNAME}}</a>. Мы всегда рады помочь!</p>
+      <p>Свяжитесь с нами по почте <a href="mailto:{{environment.SUPPORT_MAIL}}">{{environment.SUPPORT_MAIL}}</a> или через Telegram <a href="https://t.me/{{environment.TELEGRAM.SUPPORT_USERNAME}}" target="_blank" rel="noopener noreferrer">&commat;{{environment.TELEGRAM.SUPPORT_USERNAME}}</a>. Мы всегда рады помочь!</p>
+
+      <hr class="my-4">
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-8">
+          <div *ngIf="successMessage" class="alert alert-success" role="alert">
+            {{ successMessage }}
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
+          </div>
+
+          <form [formGroup]="cancelForm" (ngSubmit)="onSubmit()" novalidate>
+            <mdb-form-control class="mb-3">
+              <input
+                mdbInput
+                type="email"
+                id="cancelSubscriptionEmail"
+                class="form-control"
+                formControlName="email"
+                placeholder=" "
+                [class.is-invalid]="cancelForm.get('email')?.invalid && cancelForm.get('email')?.touched"
+              >
+              <label mdbLabel class="form-label" for="cancelSubscriptionEmail">E-mail адрес</label>
+              <div class="invalid-feedback d-block" *ngIf="cancelForm.get('email')?.invalid && cancelForm.get('email')?.touched">
+                <small *ngIf="cancelForm.get('email')?.errors?.['required']">Email адрес обязателен</small>
+                <small *ngIf="cancelForm.get('email')?.errors?.['email']">Введите корректный email адрес</small>
+              </div>
+            </mdb-form-control>
+
+            <div *ngIf="CAPTCHA_ENABLED" id="cancel-subscription-captcha" class="smart-captcha mb-3 position-relative">
+              <div *ngIf="!captchaLoaded" class="captcha-loader d-flex justify-content-center align-items-center">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Загрузка капчи...</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-danger fw-bold cancel-submit-btn"
+              [disabled]="cancelForm.invalid || !isCaptchaCompleted() || isSubmitting"
+              mdbRipple
+            >
+              <span *ngIf="!isSubmitting">Отменить подписку</span>
+              <span *ngIf="isSubmitting" class="d-inline-flex align-items-center">
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Отмена подписки...
+              </span>
+            </button>
+
+            <p class="text-muted small mt-3 text-center">
+              Нажимая кнопку «Отменить подписку», вы подтверждаете свое согласие с условиями
+              <a href="/oferta" target="_blank" rel="noopener noreferrer" class="text-decoration-none">договора оферты</a>
+              и правилами использования
+              <a href="/oferta" target="_blank" rel="noopener noreferrer" class="text-decoration-none">системы регулярных платежей</a>
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
