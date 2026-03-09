@@ -18,6 +18,7 @@ import {environment} from "../../environments/environment";
 import {YandexCaptchaService} from "../shared/services/yandex-captcha.service";
 import {ToastComponent} from "../shared/components/toast/toast.component";
 import {MdbNotificationRef, MdbNotificationService} from "mdb-angular-ui-kit/notification";
+import {MonthWordPipe} from "../shared/pipes/month-word.pipe";
 
 @Component({
   selector: 'app-order',
@@ -32,6 +33,7 @@ import {MdbNotificationRef, MdbNotificationService} from "mdb-angular-ui-kit/not
     MdbRadioModule,
     MoneyPipe,
     MdbRippleModule,
+    MonthWordPipe,
   ]
 })
 export class OrderComponent implements OnInit, OnDestroy {
@@ -79,10 +81,6 @@ export class OrderComponent implements OnInit, OnDestroy {
     return email === emailConfirm ? null : { emailMismatch: true };
   }
 
-  getMonthWord(count: number): string {
-    return getMonthWord(count);
-  }
-
   getTelegramBotLink(): string {
     return `https://t.me/${this.environment.TELEGRAM.BOT_NAME}`;
   }
@@ -116,7 +114,7 @@ export class OrderComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           setTimeout(() => {
             this.initCaptcha();
-          }, 1000);
+          }, 500);
         },
         error: (err) => {
           console.error('Error loading tariff:', err);
@@ -176,7 +174,6 @@ export class OrderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log('Order created successfully:', response);
           this.paymentUrl = response.url;
           window.location.href = this.paymentUrl;
         },

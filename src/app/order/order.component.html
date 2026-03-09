@@ -69,8 +69,7 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-start mb-3">
                     <div class="me-2">
-                      <h6 class="card-title fw-bold mb-1">{{ tariff.name }}</h6>
-                      <p class="card-text text-muted small mb-0">{{ tariff.description }}</p>
+                      <h6 class="card-title fw-bold mb-1">{{ tariff.name }} на {{ tariff.durationMonths | monthWord }}</h6>
                     </div>
                     <div class="text-end">
                       <div class="h4 text-primary text-nowrap fw-bold mb-0">{{ tariff.amount | money:tariff.currency }}</div>
@@ -85,7 +84,7 @@
                         <span class="badge bg-info me-2"><i class="far fa-clock"></i>️</span>
                         <div>
                           <small class="text-muted me-1">Длительность:</small>
-                          <strong *ngIf="!tariff.isTrial">{{ tariff.durationMonths }} {{ getMonthWord(tariff.durationMonths) }}</strong>
+                          <strong *ngIf="!tariff.isTrial">{{ tariff.durationMonths | monthWord }}</strong>
                           <strong *ngIf="tariff.isTrial">{{environment.TRIAL_PERIOD_DAYS}} дней</strong>
                         </div>
                       </div>
