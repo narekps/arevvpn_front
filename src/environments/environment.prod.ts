@@ -9,7 +9,7 @@ export const environment = {
   TOAST_ERROR_DURATION: 10000,
 
   SUPPORT_MAIL: 'help@arevvpn.ru',
-  TRIAL_PERIOD_DAYS: 5,
+  TRIAL_PERIOD_DAYS: 1,
 
   TELEGRAM: {
     BOT_NAME: 'ArevVPNbot',

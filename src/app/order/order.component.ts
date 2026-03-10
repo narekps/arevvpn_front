@@ -12,13 +12,13 @@ import {Subject, takeUntil} from 'rxjs';
 import {MdbRippleModule} from 'mdb-angular-ui-kit/ripple';
 import {MdbCheckboxModule} from 'mdb-angular-ui-kit/checkbox';
 import {MdbRadioModule} from 'mdb-angular-ui-kit/radio';
-import {getMonthWord} from '../shared/util';
 import {CreateOrderRequest} from "../models/order/order-data.interface";
 import {environment} from "../../environments/environment";
 import {YandexCaptchaService} from "../shared/services/yandex-captcha.service";
 import {ToastComponent} from "../shared/components/toast/toast.component";
 import {MdbNotificationRef, MdbNotificationService} from "mdb-angular-ui-kit/notification";
 import {MonthWordPipe} from "../shared/pipes/month-word.pipe";
+import {DayWordPipe} from "../shared/pipes/day-word.pipe";
 
 @Component({
   selector: 'app-order',
@@ -34,6 +34,7 @@ import {MonthWordPipe} from "../shared/pipes/month-word.pipe";
     MoneyPipe,
     MdbRippleModule,
     MonthWordPipe,
+    DayWordPipe,
   ]
 })
 export class OrderComponent implements OnInit, OnDestroy {
@@ -79,10 +80,6 @@ export class OrderComponent implements OnInit, OnDestroy {
     }
 
     return email === emailConfirm ? null : { emailMismatch: true };
-  }
-
-  getTelegramBotLink(): string {
-    return `https://t.me/${this.environment.TELEGRAM.BOT_NAME}`;
   }
 
   ngOnInit(): void {
