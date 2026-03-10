@@ -12,12 +12,13 @@ import {Subject, takeUntil} from 'rxjs';
 import {MdbRippleModule} from 'mdb-angular-ui-kit/ripple';
 import {MdbCheckboxModule} from 'mdb-angular-ui-kit/checkbox';
 import {MdbRadioModule} from 'mdb-angular-ui-kit/radio';
-import {getMonthWord} from '../shared/util';
 import {CreateOrderRequest} from "../models/order/order-data.interface";
 import {environment} from "../../environments/environment";
 import {YandexCaptchaService} from "../shared/services/yandex-captcha.service";
 import {ToastComponent} from "../shared/components/toast/toast.component";
 import {MdbNotificationRef, MdbNotificationService} from "mdb-angular-ui-kit/notification";
+import {MonthWordPipe} from "../shared/pipes/month-word.pipe";
+import {DayWordPipe} from "../shared/pipes/day-word.pipe";
 
 @Component({
   selector: 'app-order',
@@ -32,6 +33,8 @@ import {MdbNotificationRef, MdbNotificationService} from "mdb-angular-ui-kit/not
     MdbRadioModule,
     MoneyPipe,
     MdbRippleModule,
+    MonthWordPipe,
+    DayWordPipe,
   ]
 })
 export class OrderComponent implements OnInit, OnDestroy {
@@ -79,14 +82,6 @@ export class OrderComponent implements OnInit, OnDestroy {
     return email === emailConfirm ? null : { emailMismatch: true };
   }
 
-  getMonthWord(count: number): string {
-    return getMonthWord(count);
-  }
-
-  getTelegramBotLink(): string {
-    return `https://t.me/${this.environment.TELEGRAM.BOT_NAME}`;
-  }
-
   ngOnInit(): void {
     this.route.queryParams
       .pipe(takeUntil(this.destroy$))
@@ -116,7 +111,7 @@ export class OrderComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           setTimeout(() => {
             this.initCaptcha();
-          }, 1000);
+          }, 500);
         },
         error: (err) => {
           console.error('Error loading tariff:', err);
@@ -176,7 +171,6 @@ export class OrderComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log('Order created successfully:', response);
           this.paymentUrl = response.url;
           window.location.href = this.paymentUrl;
         },

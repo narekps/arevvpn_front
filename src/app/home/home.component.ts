@@ -19,6 +19,7 @@ import {MdbAccordionModule} from "mdb-angular-ui-kit/accordion";
 import {TariffService} from "../services/tariff.service";
 import {Tariff} from "../models/tariff/tariff";
 import {ListResponse} from "../models/tariff/list-response";
+import {MonthWordPipe} from "../shared/pipes/month-word.pipe";
 
 declare let ym: any;
 
@@ -35,6 +36,7 @@ declare let ym: any;
     NgIf,
     NgForOf,
     NgClass,
+    MonthWordPipe,
 
   ]
 })
