@@ -5,6 +5,7 @@ import {Subject, takeUntil} from 'rxjs';
 import {CommonModule} from '@angular/common';
 import {MdbLoadingModule} from 'mdb-angular-ui-kit/loading';
 import {OrderCallbackRequest} from '../../models/order/order-data.interface';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-order-callback',

@@ -13,7 +13,7 @@ import { filter } from 'rxjs/operators';
 import {ActivatedRoute, Router, NavigationEnd} from "@angular/router";
 import {interval, Subscription} from 'rxjs';
 import {environment} from "../environments/environment";
-import {CookieConsentComponent} from "./shared/components/cookie-consent/cookie-consent.component";
+import {YandexMetrikaService} from "./core/services/yandex-metrika.service";
 
 @Component({
   selector: 'app-root',
@@ -36,6 +36,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     private swUpdate: SwUpdate,
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
+    private yandexMetrikaService: YandexMetrikaService,
   ) {
   }
 
@@ -51,6 +52,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.swUpdate.activateUpdate().then(() => document.location.reload());
       });
     }
+
+    this.yandexMetrikaService.init();
   }
 
   ngAfterViewInit(): void {
