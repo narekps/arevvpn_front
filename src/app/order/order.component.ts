@@ -176,7 +176,7 @@ export class OrderComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           console.error('Error creating order:', err);
-          this.error = 'Ошибка при создании заказа. Пожалуйста, попробуйте позже.';
+          this.error = err?.error?.message || 'Ошибка при создании заказа. Пожалуйста, попробуйте позже.';
           this.isCreatingOrder = false;
 
           // Перерендеровываем капчу при ошибке чтобы пользователь мог пройти ее еще раз
