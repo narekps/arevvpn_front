@@ -1,18 +1,75 @@
-<div class="container mt-5 mb-5">
+<div class="container my-3">
   <div class="row justify-content-center">
-    <div class="col-lg-10">
-      <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-          <h3 class="mb-0">Инструкция</h3>
-          <a routerLink="/profile/loyalty" class="btn btn-light btn-sm">
-            <i class="fas fa-arrow-left me-1"></i>
-            Назад
-          </a>
-        </div>
-        <div class="card-body">
-          <h1>instruction instruction...</h1>
+    <div class="col-12 col-lg-9">
+
+      <!-- ── Шапка страницы ── -->
+      <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+        <h1 class="h3 fw-bold mb-0">
+          <i class="fas fa-shield-alt me-2 text-warning"></i>
+          Инструкция по подключению
+        </h1>
+        <a routerLink="/" class="btn btn-outline-warning btn-sm">
+          <i class="fas fa-arrow-left me-1"></i>На главную
+        </a>
+      </div>
+
+      <!-- ── Вводный блок ── -->
+      <div class="alert alert-warning d-flex align-items-start gap-3 mb-4">
+        <i class="fas fa-info-circle fa-lg mt-1 flex-shrink-0"></i>
+        <div>
+          <strong>Как это работает:</strong> После покупки вы получаете
+          <strong>ссылку на подписку</strong> — она выглядит примерно так:<br>
+          <code class="subscription-url-example d-block mt-2 text-break text-center">
+            {{environment.API_URL}}/key/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+          </code>
+          <span class="d-block mt-2">
+            Добавьте эту ссылку в приложение <strong>Happ</strong> — и получите доступ
+            ко всем серверам. Инструкция ниже покажет как это сделать шаг за шагом.
+          </span>
         </div>
       </div>
+
+      <!-- ── Выбор устройства ── -->
+      <div class="card shadow-sm mb-4">
+        <div class="card-body text-center py-4">
+          <p class="fw-semibold mb-3">
+            <i class="fas fa-mobile-alt me-2 text-warning"></i>
+            Выберите ваше устройство:
+          </p>
+          <div class="d-flex flex-wrap gap-2 justify-content-center">
+            @for (device of devices; track device.id) {
+              <button
+                class="btn device-btn"
+                [class.btn-warning]="activeDevice === device.id"
+                [class.btn-outline-warning]="activeDevice !== device.id"
+                (click)="setDevice(device.id)">
+                <i [class]="device.icon + ' me-2'"></i>{{ device.label }}
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-warning d-flex align-items-start gap-2 mb-3">
+        <i class="fas fa-info-circle flex-shrink-0 mt-1"></i>
+        <div>
+          Актуальные версии приложения Happ всегда можно найти на
+          <a href="https://www.happ.su/main/ru" target="_blank" rel="noopener" class="text-warning fw-semibold">официальном сайте happ.su</a>.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           iOS / iPadOS
+      ══════════════════════════════════════════════ -->
+      @switch (activeDevice) {
+        @case ('ios')     { <app-ios-instruction /> }
+        @case ('android') { <app-android-instruction /> }
+        @case ('windows') { <app-windows-instruction /> }
+        @case ('mac')     { <app-mac-instruction /> }
+        @case ('linux')   { <app-linux-instruction /> }
+        @case ('tv')      { <app-tv-instruction /> }
+      }
+
     </div>
   </div>
 </div>

@@ -1,0 +1,170 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex align-items-center gap-2 py-3">
+    <i class="fab fa-windows fa-lg"></i>
+    <span class="fw-semibold">Windows</span>
+  </div>
+  <div class="card-body p-4">
+
+    <!-- Шаг 1 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">1</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Скачайте и установите Happ</h5>
+        <p class="text-muted mb-3">
+          Скачайте установочный файл <strong>Happ</strong>
+          с официального сайта или GitHub.
+        </p>
+        <a href="{{environment.HAPP.Windows}}"
+           target="_blank" rel="noopener"
+           class="btn btn-outline-warning btn-sm mb-3">
+          <i class="fab fa-windows me-2"></i>Скачать Happ для Windows
+        </a>
+
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Скачайте файл <code>Happ-Setup-x.x.x.exe</code>.</li>
+          <li class="mb-2">Запустите установщик. При запросе UAC нажмите
+            <strong>«Да»</strong> (требуются права администратора для
+            установки VPN-драйвера).</li>
+          <li class="mb-2">Следуйте инструкциям мастера установки и нажмите
+            <strong>«Установить»</strong>.</li>
+        </ol>
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: файл Happ-Setup-x.x.x.exe в папке загрузок Windows -->
+            <app-screenshot
+              src="assets/instruction/windows/step1-downloaded-file.jpg"
+              alt="Установочный файл Happ-Setup.exe в загрузках"></app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: мастер установки Happ Windows — экран «Готово к установке» с кнопкой «Установить» -->
+            <app-screenshot
+              src="assets/instruction/windows/step1-installation-wizard.jpg"
+              alt="Мастер установки Happ — кнопка «Установить»"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 2 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">2</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Откройте Happ</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">После установки Happ запустится автоматически.
+            В дальнейшем открывайте его через значок на рабочем столе или
+            в меню «Пуск».</li>
+          <li class="mb-2">Happ добавит иконку в
+            <strong>системный трей</strong> (правый нижний угол экрана).</li>
+        </ol>
+        <!-- СКРИНШОТ: главное окно Happ для Windows — пустой список, меню сверху -->
+        <app-screenshot
+          src="assets/instruction/windows/step2-main-window.jpg"
+          alt="Главное окно Happ сразу после открытия"></app-screenshot>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 3 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">3</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Добавьте подписку</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">В главном окне нажмите кнопку
+            <strong>«+»</strong> или перейдите в раздел
+            <strong>«Подписки»</strong> (Subscriptions).</li>
+          <li class="mb-2">Выберите <strong>«Добавить подписку»</strong>
+            (Add Subscription).</li>
+          <li class="mb-2">Вставьте ссылку, полученную после оплаты,
+            в поле <strong>«URL»</strong>.</li>
+          <li class="mb-2">Нажмите <strong>«Сохранить»</strong> или <strong>«OK»</strong>.
+            Happ загрузит список серверов.</li>
+        </ol>
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: диалоговое окно «Добавить подписку» в Happ Windows с полем URL -->
+            <app-screenshot
+              src="assets/instruction/windows/step3-add-subscription.jpg"
+              alt="Диалог «Добавить подписку» — поле URL"></app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: список серверов в Happ Windows после загрузки подписки -->
+            <app-screenshot
+              src="assets/instruction/windows/step3-server-list.jpg"
+              alt="Список серверов после загрузки подписки"></app-screenshot>
+          </div>
+        </div>
+        <div class="alert alert-warning d-flex align-items-start gap-2 mb-0">
+          <i class="fas fa-lightbulb flex-shrink-0 mt-1"></i>
+          <div>
+            Ваша ссылка выглядит так:
+            <code class="subscription-url-example d-block mt-1 text-break">
+              {{environment.API_URL}}/key/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 4 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">4</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Выберите сервер</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">В выпадающем списке или на главном экране
+            выберите нужный сервер.</li>
+          <li class="mb-2">Рекомендуем выбирать сервер с наименьшей
+            задержкой (ping).</li>
+        </ol>
+        <!-- СКРИНШОТ: главное окно Happ Windows с выпадающим списком серверов, один выбран -->
+        <app-screenshot
+          src="assets/instruction/windows/step4-select-server.jpg"
+          alt="Выпадающий список серверов — выберите нужный"></app-screenshot>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 5 -->
+    <div class="d-flex gap-3 mb-4">
+      <div class="step-badge">5</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Подключитесь к VPN</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Нажмите большую кнопку
+            <strong>«Подключить»</strong> (Connect).</li>
+          <li class="mb-2">Windows может запросить разрешение
+            брандмауэра — нажмите <strong>«Разрешить доступ»</strong>.</li>
+          <li class="mb-2">Когда кнопка станет
+            <strong>«Отключить»</strong> (Disconnect) и иконка в трее
+            изменится — VPN активен! ✅</li>
+        </ol>
+        <div class="row g-3 mb-0">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: запрос брандмауэра Windows «Happ» хочет получить доступ к сети — кнопка «Разрешить доступ» -->
+            <app-screenshot
+              src="assets/instruction/windows/step5-firewall-request.jpg"
+              alt="Запрос брандмауэра Windows — «Разрешить доступ»"></app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: главное окно Happ Windows со статусом «Подключено» и зелёной иконкой в системном трее -->
+            <app-screenshot
+              src="assets/instruction/windows/step5-connected.jpg"
+              alt="Happ: статус «Подключено» + зелёная иконка в трее"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-instruction-success></app-instruction-success>
+
+  </div>
+</div>
+

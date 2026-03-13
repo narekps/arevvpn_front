@@ -1,4 +1,4 @@
-<header class="main-header sticky-top mb-2 pt-2 pb-2 d-lg-none bg-black shadow" #headerSection
+<header class="main-header mb-2 pt-2 pb-2 d-lg-none bg-black shadow" #headerSection
         [class.header-hidden]="!showHeader"
 >
   <div class="container">
@@ -80,7 +80,7 @@
   </a>
 </div>
 
-<main class="main-content">
+<main class="main-content" [style.margin-top]="showHeader ? '86px' : null">
   <router-outlet></router-outlet>
 </main>
 

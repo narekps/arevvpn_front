@@ -23,7 +23,7 @@ import {YandexMetrikaService} from "./core/services/yandex-metrika.service";
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('headerSection') headerSection!: ElementRef<HTMLElement>;
-  showHeader: boolean = false;
+  showHeader: boolean = true;
 
   protected readonly environment = environment;
 
@@ -96,7 +96,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       const heroHeight = this.headerSection.nativeElement.offsetHeight;
       const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-      this.showHeader = scrollPosition > heroHeight + 100;
+      this.showHeader = scrollPosition < heroHeight;
       this.cdr.detectChanges();
     }
   }

@@ -1,0 +1,190 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex align-items-center gap-2 py-3">
+    <i class="fas fa-tv fa-lg"></i>
+    <span class="fw-semibold">Smart TV</span>
+  </div>
+  <div class="card-body p-4">
+
+    <!-- Выбор типа ТВ -->
+    <div class="alert alert-warning d-flex align-items-start gap-2 mb-4">
+      <i class="fas fa-info-circle flex-shrink-0 mt-1"></i>
+      <div>
+        Инструкция различается в зависимости от вашего телевизора.
+        Выберите подходящий вариант ниже.
+      </div>
+    </div>
+
+    <!-- Android TV / Google TV -->
+    <div class="border rounded p-3 mb-4">
+      <h5 class="fw-semibold mb-3 d-flex align-items-center gap-2">
+        <i class="fab fa-android text-success"></i>
+        Android TV / Google TV
+      </h5>
+      <p class="text-muted small mb-3">
+        Подходит для телевизоров Philips, Sony, TCL, Hisense, Xiaomi,
+        а также приставок Chromecast с Google TV, NVIDIA Shield и других.
+      </p>
+
+      <div class="d-flex gap-3 mb-0">
+        <div class="step-badge" style="font-size: 0.8rem;">1</div>
+        <div class="step-content flex-grow-1">
+          <p class="fw-semibold mb-1">Установите Happ через Google Play</p>
+          <p class="text-muted small mb-2">
+            Откройте <strong>Google Play</strong> на телевизоре,
+            найдите <strong>Happ</strong> и установите приложение.
+            Если поиск неудобен пультом — воспользуйтесь функцией
+            «Установить на устройство» из мобильного приложения Google Play.
+          </p>
+          <!-- СКРИНШОТ: Google Play на Android TV — поиск «Happ», страница установки -->
+          <app-screenshot
+            alt="Google Play на Android TV — страница Happ с кнопкой «Установить»"
+            [marginBottom]="true">
+          </app-screenshot>
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 mb-0 mt-3">
+        <div class="step-badge" style="font-size: 0.8rem;">2</div>
+        <div class="step-content flex-grow-1">
+          <p class="fw-semibold mb-1">Добавьте подписку</p>
+          <p class="text-muted small mb-2">
+            Откройте Happ. С помощью экранной клавиатуры
+            введите в поле <strong>«URL подписки»</strong> вашу ссылку
+            и нажмите <strong>«Сохранить»</strong>.<br>
+            <span class="text-muted">
+              <i class="fas fa-lightbulb me-1 text-warning"></i>
+              Удобнее вводить ссылку через мобильный телефон —
+              отправьте ссылку себе в Telegram и скопируйте с ТВ-браузера,
+              или воспользуйтесь функцией «Отправить на телефон».
+            </span>
+          </p>
+          <!-- СКРИНШОТ: Happ на Android TV — экран ввода URL подписки с экранной клавиатурой -->
+          <app-screenshot
+            alt="Happ на Android TV — экран ввода URL подписки"
+            [marginBottom]="true">
+          </app-screenshot>
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 mb-0 mt-3">
+        <div class="step-badge" style="font-size: 0.8rem;">3</div>
+        <div class="step-content flex-grow-1">
+          <p class="fw-semibold mb-1">Выберите сервер и подключитесь</p>
+          <p class="text-muted small mb-2">
+            Выберите сервер из загруженного списка и нажмите
+            <strong>«Подключить»</strong>. При запросе разрешения VPN
+            нажмите <strong>«ОК»</strong>.
+          </p>
+          <!-- СКРИНШОТ: Happ на Android TV со статусом «Подключено» — зелёный индикатор -->
+          <app-screenshot alt="Happ на Android TV: статус «Подключено»"></app-screenshot>
+        </div>
+      </div>
+    </div>
+
+    <!-- Apple TV -->
+    <div class="border rounded p-3 mb-4">
+      <h5 class="fw-semibold mb-3 d-flex align-items-center gap-2">
+        <i class="fab fa-apple text-dark"></i>
+        Apple TV (tvOS)
+      </h5>
+      <p class="text-muted small mb-3">
+        Подходит для <strong>Apple TV 4K</strong> и <strong>Apple TV HD</strong>
+        с tvOS 17 и новее.
+      </p>
+
+      <div class="d-flex gap-3 mb-0">
+        <div class="step-badge" style="font-size: 0.8rem;">1</div>
+        <div class="step-content flex-grow-1">
+          <p class="fw-semibold mb-1">Установите Happ из App Store</p>
+          <p class="text-muted small mb-2">
+            На главном экране Apple TV откройте <strong>App Store</strong>
+            и найдите приложение <strong>Happ</strong>.
+          </p>
+          <p class="text-muted small mb-1">
+            <i class="fas fa-search me-1"></i>
+            Как найти вручную:
+          </p>
+          <ol class="ps-3 text-muted small mb-3">
+            <li class="mb-1">Откройте <strong>App Store</strong> на Apple TV.</li>
+            <li class="mb-1">Выберите раздел <strong>«Поиск»</strong> (Search)
+              в верхнем меню.</li>
+            <li class="mb-1">С помощью пульта Siri Remote введите
+              <strong>Happ</strong> на экранной клавиатуре,
+              или нажмите и удерживайте кнопку 🎤 и скажите:
+              <em>«Happ»</em>.</li>
+            <li class="mb-1">Выберите приложение <strong>Happ — Proxy Utility</strong>
+              и нажмите <strong>«Загрузить»</strong>.</li>
+          </ol>
+          <!-- СКРИНШОТ: App Store на Apple TV — экран поиска, в строке введено «Happ», в результатах «Happ — Proxy Utility» -->
+          <app-screenshot
+            alt="App Store на Apple TV — результаты поиска «Happ»: выбрать Happ — Proxy Utility"
+            [marginBottom]="true">
+          </app-screenshot>
+          <!-- СКРИНШОТ: страница приложения Happ в App Store на Apple TV с кнопкой «Загрузить» -->
+          <app-screenshot
+            alt="Страница Happ в App Store на Apple TV — кнопка «Загрузить»"
+            [marginBottom]="true">
+          </app-screenshot>
+          <div class="alert alert-warning d-flex align-items-start gap-2 mb-0 small">
+            <i class="fas fa-lightbulb flex-shrink-0 mt-1 text-warning"></i>
+            <div>
+              <strong>Совет:</strong> если у вас есть iPhone или iPad с тем же
+              Apple ID — найдите Happ в App Store на телефоне и нажмите
+              <strong>«Установить на Apple TV»</strong>: вводить ничего не придётся.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 mb-0 mt-3">
+        <div class="step-badge" style="font-size: 0.8rem;">2</div>
+        <div class="step-content flex-grow-1">
+          <p class="fw-semibold mb-1">Добавьте подписку</p>
+          <p class="text-muted small mb-2">
+            Откройте <strong>Happ</strong> на Apple TV. В разделе
+            <strong>«Подписки»</strong> нажмите <strong>«+»</strong>
+            и введите вашу ссылку в поле <strong>«URL»</strong>.
+          </p>
+          <div class="alert alert-warning d-flex align-items-start gap-2 mb-3 small">
+            <i class="fas fa-lightbulb flex-shrink-0 mt-1 text-warning"></i>
+            <div>
+              <strong>Удобный способ:</strong> на iPhone или iPad откройте
+              Happ → добавьте подписку там → включите
+              <strong>iCloud Sync</strong> (если поддерживается) —
+              подписка появится на Apple TV автоматически.
+              Если синхронизации нет, введите ссылку через экранную клавиатуру
+              с пульта Siri Remote.
+            </div>
+          </div>
+          <!-- СКРИНШОТ: Happ на Apple TV — экран ввода URL подписки с экранной клавиатурой tvOS -->
+          <app-screenshot alt="Happ на Apple TV — поле ввода URL подписки с клавиатурой tvOS"></app-screenshot>
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 mb-0 mt-3">
+        <div class="step-badge" style="font-size: 0.8rem;">3</div>
+        <div class="step-content flex-grow-1">
+          <p class="fw-semibold mb-1">Выберите сервер и подключитесь</p>
+          <p class="text-muted small mb-2">
+            Выберите сервер из загруженного списка и нажмите
+            <strong>«Подключить»</strong>. При запросе разрешения
+            на VPN-конфигурацию нажмите <strong>«Разрешить»</strong>.
+          </p>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <!-- СКРИНШОТ: системный диалог tvOS «Happ» хочет добавить VPN-конфигурации — кнопка «Разрешить» -->
+              <app-screenshot alt="Системный запрос tvOS — «Разрешить» для VPN"></app-screenshot>
+            </div>
+            <div class="col-sm-6">
+              <!-- СКРИНШОТ: главный экран Happ на Apple TV со статусом «Подключено» — зелёный индикатор -->
+              <app-screenshot alt="Happ на Apple TV: статус «Подключено»"></app-screenshot>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-instruction-success message="VPN активен. Теперь вы можете смотреть YouTube без рекламы — трафик зашифрован."></app-instruction-success>
+
+  </div>
+</div>

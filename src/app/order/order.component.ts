@@ -115,7 +115,7 @@ export class OrderComponent implements OnInit, OnDestroy {
         },
         error: (err) => {
           console.error('Error loading tariff:', err);
-          this.error = 'Не удалось загрузить информацию о тарифе. Пожалуйста, попробуйте еще раз или выберите другой тариф.';
+          this.error = err?.error?.message || 'Не удалось загрузить информацию о тарифе. Пожалуйста, попробуйте еще раз или выберите другой тариф.';
           this.isLoading = false;
         }
       });

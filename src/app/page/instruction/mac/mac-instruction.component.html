@@ -1,0 +1,173 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex align-items-center gap-2 py-3">
+    <i class="fab fa-apple fa-lg"></i>
+    <span class="fw-semibold">macOS</span>
+  </div>
+  <div class="card-body p-4">
+
+    <!-- Шаг 1 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">1</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Установите приложение Happ</h5>
+        <p class="text-muted mb-3">
+          Скачайте <strong>Happ</strong> из Mac App Store.
+        </p>
+        <a href="{{environment.HAPP.MacOS}}"
+           target="_blank" rel="noopener"
+           class="btn btn-dark btn-sm mb-3">
+          <i class="fab fa-apple me-2"></i>Скачать в Mac App Store
+        </a>
+        <p class="text-muted small mb-2">
+          <i class="fas fa-search me-1"></i>
+          <strong>Если ссылка не сработала</strong> — найдите приложение вручную:
+        </p>
+        <ol class="ps-3 text-muted small mb-3">
+          <li class="mb-1">Откройте <strong>App Store</strong> (значок в Dock или через Launchpad).</li>
+          <li class="mb-1">Нажмите на строку поиска 🔍 в левом верхнем углу.</li>
+          <li class="mb-1">Введите: <strong>Happ</strong> и нажмите <strong>Enter</strong>.</li>
+          <li class="mb-1">Найдите приложение <strong>Happ — Proxy Utility</strong>
+            и нажмите <strong>«Загрузить»</strong>.</li>
+        </ol>
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: Mac App Store — строка поиска с текстом «Happ», в результатах приложение «Happ — Proxy Utility» с кнопкой «Загрузить» -->
+            <app-screenshot
+              src="assets/instruction/mac/step1-mac-app-store-search.jpg"
+              alt="Mac App Store — результаты поиска «Happ»: выбрать Happ — Proxy Utility → «Загрузить»"
+              [marginBottom]="true">
+            </app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: страница Happ в Mac App Store с кнопкой «Загрузить» -->
+            <app-screenshot
+              src="assets/instruction/mac/step1-mac-app-store-page.jpg"
+              alt="Страница Happ в Mac App Store — кнопка «Загрузить»"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 2 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">2</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Откройте Happ и добавьте подписку</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Откройте <strong>Happ</strong> из папки
+            «Программы» (Applications) или через Launchpad.</li>
+          <li class="mb-2">На главном экране нажмите иконку
+            <strong>«+»</strong> в правом верхнем углу или кнопку
+            <strong>«Добавить»</strong>.</li>
+          <li class="mb-2">В появившемся меню выберите
+            <strong>«URL подписки»</strong> (Subscription URL).</li>
+        </ol>
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: главное окно Happ macOS с кнопкой «+» и пустым списком серверов -->
+            <app-screenshot
+              src="assets/instruction/mac/step2-happ-main-window.jpg"
+              alt="Главное окно Happ macOS — кнопка «+»"></app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: диалог добавления подписки в Happ macOS с полем URL -->
+            <app-screenshot
+              src="assets/instruction/mac/step2-happ-add-subscription.jpg"
+              alt="Диалог «Добавить подписку» — поле URL"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 3 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">3</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Введите ссылку на подписку</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">В поле <strong>«URL подписки»</strong> вставьте
+            ссылку, которую вы получили после оплаты.</li>
+          <li class="mb-2">Нажмите <strong>«Сохранить»</strong> или
+            <strong>«ОК»</strong>.</li>
+          <li class="mb-2">Приложение автоматически загрузит список серверов.</li>
+        </ol>
+        <!-- СКРИНШОТ: экран ввода URL-подписки — текстовое поле с вставленной ссылкой -->
+        <app-screenshot
+          src="assets/instruction/mac/step3-happ-enter-subscription-url.jpg"
+          alt="Экран ввода ссылки — поле «URL подписки» с вашей ссылкой"
+          [marginBottom]="true">
+        </app-screenshot>
+        <div class="alert alert-warning d-flex align-items-start gap-2 mb-0">
+          <i class="fas fa-lightbulb flex-shrink-0 mt-1"></i>
+          <div>
+            Ваша ссылка выглядит так:
+            <code class="subscription-url-example d-block mt-1 text-break">
+              {{environment.API_URL}}/key/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 4 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">4</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Выберите сервер</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">После сохранения в списке появятся доступные серверы.</li>
+          <li class="mb-2">Нажмите на нужный сервер, чтобы выбрать его.
+            Если серверов несколько — выберите любой.</li>
+        </ol>
+        <!-- СКРИНШОТ: список серверов в Happ macOS после загрузки подписки -->
+        <app-screenshot
+          src="assets/instruction/mac/step4-happ-server-list.jpg"
+          alt="Список серверов в Happ macOS — выберите нужный"></app-screenshot>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 5 -->
+    <div class="d-flex gap-3 mb-4">
+      <div class="step-badge">5</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Подключитесь к VPN</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Нажмите кнопку <strong>«Подключить»</strong>
+            (Connect).</li>
+          <li class="mb-2">macOS запросит разрешение на добавление
+            VPN-конфигурации — нажмите <strong>«Разрешить»</strong>.</li>
+          <li class="mb-2">Если система перенаправит вас в
+            <strong>Системные настройки → Конфиденциальность и безопасность</strong>,
+            нажмите <strong>«Разрешить»</strong> для Happ.</li>
+          <li class="mb-2">Когда на кнопке появится текст <code>ПОДКЛЮЧЕН</code> — VPN соединение установлено! ✅</li>
+        </ol>
+        <div class="row g-3 mb-0">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: системный диалог macOS «Happ» хочет добавить VPN-конфигурации — кнопка «Разрешить» -->
+            <app-screenshot
+              src="assets/instruction/mac/step5-macos-vpn-permission.jpg"
+              alt="Системный запрос macOS — «Разрешить» VPN"></app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: главное окно Happ macOS со статусом «Подключено» и иконкой VPN в меню-баре -->
+            <app-screenshot
+              src="assets/instruction/mac/step5-happ-connected.jpg"
+              alt="Happ macOS: «Подключено» + иконка VPN в меню-баре"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-instruction-success></app-instruction-success>
+
+  </div>
+</div>
+

@@ -1,0 +1,158 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex align-items-center gap-2 py-3">
+    <i class="fab fa-linux fa-lg"></i>
+    <span class="fw-semibold">Linux</span>
+  </div>
+  <div class="card-body p-4">
+
+    <!-- Шаг 1 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">1</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Скачайте Happ</h5>
+        <p class="text-muted mb-3">
+          Скачайте актуальный релиз <strong>Happ</strong> для Linux
+          со страницы релизов на GitHub. Доступны форматы
+          <code>.deb</code>, <code>.rpm</code> и <code>.pkg</code>.
+        </p>
+        <a href="{{environment.HAPP.LinuxDeb}}"
+           target="_blank" rel="noopener"
+           class="btn btn-outline-warning btn-sm mb-3 me-3">
+          <i class="fab fa-github me-2"></i>Скачать Happ для Linux (.Deb)
+        </a>
+        <a href="{{environment.HAPP.LinuxRpm}}"
+           target="_blank" rel="noopener"
+           class="btn btn-outline-warning btn-sm mb-3 me-3">
+          <i class="fab fa-github me-2"></i>Скачать Happ для Linux (.Rpm)
+        </a>
+        <a href="{{environment.HAPP.LinuxPkg}}"
+           target="_blank" rel="noopener"
+           class="btn btn-outline-warning btn-sm mb-3">
+          <i class="fab fa-github me-2"></i>Скачать Happ для Linux (.Pkg)
+        </a>
+        <!-- СКРИНШОТ: страница релизов Happ на GitHub — список файлов для Linux (.AppImage, .deb, .rpm) -->
+        <app-screenshot
+          src="assets/instruction/linux/step1-downloaded-file.jpg"
+          alt="Установочный файл Happ.linux.x64.deb в загрузках"></app-screenshot>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 2 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">2</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Установите приложение</h5>
+        <p class="text-muted mb-2">Выберите способ в зависимости от вашего дистрибутива:</p>
+        <div class="mb-3">
+          <p class="fw-semibold mb-1 small text-uppercase text-muted">Debian / Ubuntu (.deb)</p>
+          <pre class="bg-light rounded p-3 mb-0 small text-break"><code>sudo dpkg -i Happ.linux.x64.deb</code></pre>
+        </div>
+        <div class="mb-3">
+          <p class="fw-semibold mb-1 small text-uppercase text-muted">Fedora / openSUSE (.rpm)</p>
+          <pre class="bg-light rounded p-3 mb-0 small text-break"><code>sudo rpm -i Happ-x.x.x.x86_64.rpm</code></pre>
+        </div>
+        <div class="mb-3">
+          <p class="fw-semibold mb-1 small text-uppercase text-muted">Arch Linux / Manjaro (.pkg)</p>
+          <pre class="bg-light rounded p-3 mb-0 small text-break"><code>sudo pacman -U Hhapp-x.x.x-x86_64.pkg.tar.zst</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 3 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">3</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Откройте Happ и добавьте подписку</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Запустите <strong>Happ</strong> из меню приложений
+            или командой <code>happ</code> в терминале.</li>
+          <li class="mb-2">Нажмите кнопку <strong>«+»</strong> или перейдите
+            в раздел <strong>«Подписки»</strong> (Subscriptions).</li>
+          <li class="mb-2">Вставьте вашу ссылку в поле <strong>«URL»</strong>
+            и нажмите <strong>«Сохранить»</strong>.</li>
+        </ol>
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: главное окно Happ Linux с кнопкой «+» -->
+            <app-screenshot
+              src="assets/instruction/linux/step3-main-window.jpg"
+              alt="Главное окно Happ Linux — кнопка «+»"></app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: диалог добавления подписки в Happ Linux с полем URL -->
+            <app-screenshot
+              src="assets/instruction/linux/step3-add-subscription.jpg"
+              alt="Диалог «Добавить подписку» — поле URL"></app-screenshot>
+          </div>
+        </div>
+        <div class="alert alert-warning d-flex align-items-start gap-2 mb-0">
+          <i class="fas fa-lightbulb flex-shrink-0 mt-1"></i>
+          <div>
+            Ваша ссылка выглядит так:
+            <code class="subscription-url-example d-block mt-1 text-break">
+              {{environment.API_URL}}/key/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 4 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">4</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Выберите сервер</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">После загрузки подписки в списке появятся серверы.</li>
+          <li class="mb-2">Выберите нужный сервер из списка.</li>
+        </ol>
+        <!-- СКРИНШОТ: список серверов в Happ Linux после загрузки подписки -->
+        <app-screenshot
+          src="assets/instruction/linux/step4-server-list.jpg"
+          alt="Список серверов в Happ Linux — выберите нужный"></app-screenshot>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 5 -->
+    <div class="d-flex gap-3 mb-4">
+      <div class="step-badge">5</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Подключитесь к VPN</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Нажмите кнопку <strong>«Подключить»</strong>
+            (Connect).</li>
+          <li class="mb-2">Система может запросить пароль суперпользователя
+            (<code>sudo</code>) для настройки сетевого интерфейса —
+            введите его и подтвердите.</li>
+          <li class="mb-2">Когда статус сменится на
+            <strong>«Подключено»</strong> — VPN активен! ✅</li>
+        </ol>
+        <div class="row g-3 mb-0">
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: Кнопка Подключиться -->
+            <app-screenshot
+              src="assets/instruction/linux/step5-sudo-prompt.jpg"
+              alt="Кнопка «Подключиться»"></app-screenshot>
+          </div>
+          <div class="col-sm-6">
+            <!-- СКРИНШОТ: главное окно Happ Linux со статусом «Подключено» -->
+            <app-screenshot
+              src="assets/instruction/linux/step5-connected.jpg"
+              alt="Happ Linux: статус «Подключено»"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-instruction-success></app-instruction-success>
+
+  </div>
+</div>

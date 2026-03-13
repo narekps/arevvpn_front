@@ -1,0 +1,174 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex align-items-center gap-2 py-3">
+    <i class="fab fa-android fa-lg"></i>
+    <span class="fw-semibold">Android</span>
+  </div>
+  <div class="card-body p-4">
+
+    <!-- Шаг 1 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">1</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Установите приложение Happ</h5>
+        <p class="text-muted mb-3">
+          Откройте <strong>Google Play</strong>, найдите приложение <strong>Happ</strong>
+          и нажмите «Установить».
+        </p>
+        <a href="{{environment.HAPP.Android}}"
+           target="_blank" rel="noopener"
+           class="btn btn-success btn-sm mb-3 me-3">
+          <i class="fab fa-google-play me-2"></i>Скачать в Google Play
+        </a>
+        <a href="{{environment.HAPP.AndroidAPK}}"
+           target="_blank" rel="noopener"
+           class="btn btn-outline-success btn-sm mb-3">
+          <i class="fab fa-google-play me-2"></i>Скачать APK-файл
+        </a>
+        <p class="text-muted small mb-2">
+          <i class="fas fa-search me-1"></i>
+          <strong>Если ссылка не сработала</strong> — найдите приложение вручную:
+        </p>
+        <ol class="ps-3 text-muted small mb-3">
+          <li class="mb-1">Откройте <strong>Google Play</strong>.</li>
+          <li class="mb-1">Нажмите на строку поиска 🔍 вверху экрана.</li>
+          <li class="mb-1">Введите: <strong>Happ</strong>.</li>
+          <li class="mb-1">Найдите приложение <strong>Happ — Proxy Utility</strong>
+            и нажмите <strong>«Установить»</strong>.</li>
+        </ol>
+        <div class="row g-3">
+          <div class="col-6">
+            <!-- СКРИНШОТ: Google Play — строка поиска с текстом «Happ», в результатах первым стоит приложение Happ с кнопкой «Установить» -->
+            <app-screenshot
+              src="assets/instruction/android/step1-google-play-search.jpg"
+              alt="Google Play — результаты поиска «Happ»: выбрать приложение → «Установить»"
+              [marginBottom]="true">
+            </app-screenshot>
+          </div>
+          <div class="col-6">
+            <!-- СКРИНШОТ: страница Happ в Google Play с кнопкой «Установить» -->
+            <app-screenshot
+              src="assets/instruction/android/step1-google-play-page.jpg"
+              alt="Страница Happ в Google Play — кнопка «Установить»"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 2 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">2</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Откройте Happ и добавьте подписку</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Откройте приложение <strong>Happ</strong>.</li>
+          <li class="mb-2">На главном экране нажмите кнопку
+            <strong>«+»</strong> или откройте меню (три точки / гамбургер).</li>
+          <li class="mb-2">Выберите <strong>«Добавить подписку»</strong>
+            (Add Subscription).</li>
+        </ol>
+        <div class="row g-3">
+          <div class="col-6">
+            <!-- СКРИНШОТ: главный экран Happ Android с кнопкой «+» или иконкой меню -->
+            <app-screenshot
+              src="assets/instruction/android/step2-main-screen.jpg"
+              alt="Главный экран Happ — кнопка «+»"></app-screenshot>
+          </div>
+          <div class="col-6">
+            <!-- СКРИНШОТ: меню Happ Android с пунктом «Добавить подписку» -->
+            <app-screenshot
+              src="assets/instruction/android/step2-add-subscription.jpg"
+              alt="Пункт меню «Добавить подписку»"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 3 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">3</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Введите ссылку на подписку</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">В поле <strong>«URL подписки»</strong>
+            вставьте ссылку, полученную после оплаты.</li>
+          <li class="mb-2">Нажмите <strong>«Сохранить»</strong>.</li>
+          <li class="mb-2">Приложение загрузит список серверов.</li>
+        </ol>
+        <!-- СКРИНШОТ: экран ввода URL-подписки — поле с вставленной ссылкой -->
+        <app-screenshot
+          src="assets/instruction/android/step3-subscription-url.jpg"
+          alt="Экран добавления подписки — вставьте вашу ссылку в поле"
+          [marginBottom]="true">
+        </app-screenshot>
+        <div class="alert alert-warning d-flex align-items-start gap-2 mb-0">
+          <i class="fas fa-lightbulb flex-shrink-0 mt-1"></i>
+          <div>
+            Ваша ссылка выглядит так:
+            <code class="subscription-url-example d-block mt-1 text-break">
+              {{environment.API_URL}}/key/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 4 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">4</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Выберите сервер</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">В списке серверов выберите нужный.
+            Если серверов несколько — выберите ближайший к вам.</li>
+          <li class="mb-2">Нажмите на сервер для его выбора.</li>
+        </ol>
+        <!-- СКРИНШОТ: список серверов в Happ Android после добавления подписки -->
+        <app-screenshot
+          src="assets/instruction/android/step4-server-list.jpg"
+          alt="Список серверов — нажмите на нужный для выбора"></app-screenshot>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 5 -->
+    <div class="d-flex gap-3 mb-4">
+      <div class="step-badge">5</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Подключитесь к VPN</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Нажмите большую кнопку
+            <strong>«Подключить»</strong> на главном экране.</li>
+          <li class="mb-2">Android запросит разрешение на создание
+            VPN-соединения — нажмите <strong>«ОК»</strong>.</li>
+          <li class="mb-2">Когда в строке состояния появится значок
+            <strong><code>VPN</code></strong> — соединение установлено! ✅</li>
+        </ol>
+        <div class="row g-3 mb-0">
+          <div class="col-6">
+            <!-- СКРИНШОТ: системный диалог Android «Happ хочет создать VPN-соединение» — кнопка «ОК» -->
+            <app-screenshot
+              src="assets/instruction/android/step5-vpn-permission.jpg"
+              alt="Системный запрос Android — «ОК» для VPN"></app-screenshot>
+          </div>
+          <div class="col-6">
+            <!-- СКРИНШОТ: главный экран Happ Android со статусом «Подключено» — зелёный кружок, иконка ключа в статусбаре -->
+            <app-screenshot
+              src="assets/instruction/android/step5-connected.jpg"
+              alt="Happ: статус «Подключено» + иконка ключа 🔑"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-instruction-success></app-instruction-success>
+
+  </div>
+</div>
+

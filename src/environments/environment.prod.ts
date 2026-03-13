@@ -16,6 +16,19 @@ export const environment = {
     SUPPORT_USERNAME: 'ArevVPNSupport',
   },
 
+  HAPP: {
+    Android: "https://play.google.com/store/apps/details?id=com.happproxy",
+    AndroidAPK: "https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk",
+    IOS: "https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973",
+    MacOS: "https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973?platform=mac",
+    Windows: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe",
+    LinuxDeb: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.deb",
+    LinuxRpm: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.rpm",
+    LinuxPkg: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.pkg.tar.zst",
+    AndroidTV: "https://play.google.com/store/apps/details?id=com.happproxy",
+    AppleTV: "https://apps.apple.com/us/app/happ-proxy-utility-for-tv/id6748297274",
+  },
+
   IP: {
     NAME: 'ИП Погосян Нарек Суренович',
     INN: '501813774951',

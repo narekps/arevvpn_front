@@ -1,0 +1,173 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex align-items-center gap-2 py-3">
+    <i class="fab fa-apple fa-lg"></i>
+    <span class="fw-semibold">iPhone / iPad (iOS)</span>
+  </div>
+  <div class="card-body p-4">
+
+    <!-- Шаг 1 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">1</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Установите приложение Happ</h5>
+        <p class="text-muted mb-3">
+          Откройте <strong>App Store</strong>, найдите приложение <strong>Happ</strong>
+          и нажмите «Загрузить».
+        </p>
+        <a href="{{environment.HAPP.IOS}}"
+           target="_blank" rel="noopener"
+           class="btn btn-dark btn-sm mb-3">
+          <i class="fab fa-apple me-2"></i>Скачать в App Store
+        </a>
+        <p class="text-muted small mb-2">
+          <i class="fas fa-search me-1"></i>
+          <strong>Если ссылка не сработала</strong> — найдите приложение вручную:
+        </p>
+        <ol class="ps-3 text-muted small mb-3">
+          <li class="mb-1">Откройте <strong>App Store</strong> на iPhone или iPad.</li>
+          <li class="mb-1">Нажмите на иконку поиска 🔍 внизу экрана.</li>
+          <li class="mb-1">Введите в строку поиска: <strong>Happ</strong>.</li>
+          <li class="mb-1">Найдите приложение <strong>Happ — Proxy Utility</strong>
+            и нажмите <strong>«Загрузить»</strong>.</li>
+        </ol>
+        <div class="row g-3">
+          <div class="col-6">
+            <!-- СКРИНШОТ: App Store — вкладка «Поиск», в строке введено «Happ», в результатах первым стоит «Happ — Proxy Utility» с кнопкой «Загрузить» -->
+            <app-screenshot
+              src="assets/instruction/ios/step1-app-store-search.jpg"
+              alt="App Store — результаты поиска «Happ»: выбрать Happ — Proxy Utility → «Загрузить»"
+              [marginBottom]="true">
+            </app-screenshot>
+          </div>
+          <div class="col-6">
+            <!-- СКРИНШОТ: страница Happ в App Store с кнопкой «Загрузить» и иконкой приложения -->
+            <app-screenshot
+              src="assets/instruction/ios/step1-app-store-page.jpg"
+              alt="Страница Happ в App Store — кнопка «Загрузить»">
+            </app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 2 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">2</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Откройте Happ и перейдите в подписки</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">Откройте приложение <strong>Happ</strong>.</li>
+          <li class="mb-2">На главном экране нажмите иконку
+            <strong>«+»</strong> в правом верхнем углу или кнопку
+            <strong>«Добавить»</strong>.</li>
+          <li class="mb-2">В появившемся меню выберите
+            <strong>«URL подписки»</strong> (Subscription URL).</li>
+        </ol>
+        <div class="row g-3">
+          <div class="col-6">
+            <!-- СКРИНШОТ: главный экран Happ iOS — стрелка на кнопку «+» вверху справа -->
+            <app-screenshot
+              src="assets/instruction/ios/step2-main-screen.jpg"
+              alt="Главный экран Happ — кнопка «+» (вверху справа)"></app-screenshot>
+          </div>
+          <div class="col-6">
+            <!-- СКРИНШОТ: выпадающее меню после нажатия «+» с пунктом «Добавить подписку» -->
+            <app-screenshot
+              src="assets/instruction/ios/step2-add-subscription.jpg"
+              alt="Меню с пунктом «Добавить подписку»"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 3 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">3</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Введите ссылку на подписку</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">В поле <strong>«URL подписки»</strong> вставьте
+            ссылку, которую вы получили после оплаты.</li>
+          <li class="mb-2">Нажмите <strong>«Сохранить»</strong> или
+            <strong>«ОК»</strong>.</li>
+          <li class="mb-2">Приложение автоматически загрузит список серверов.</li>
+        </ol>
+        <!-- СКРИНШОТ: экран ввода URL-подписки — текстовое поле с вставленной ссылкой -->
+        <app-screenshot
+          src="assets/instruction/ios/step3-enter-subscription-url.jpg"
+          alt="Экран ввода ссылки — поле «URL подписки» с вашей ссылкой"
+          [marginBottom]="true">
+        </app-screenshot>
+        <div class="alert alert-warning d-flex align-items-start gap-2 mb-0">
+          <i class="fas fa-lightbulb flex-shrink-0 mt-1"></i>
+          <div>
+            Ваша ссылка выглядит так:
+            <code class="subscription-url-example d-block mt-1 text-break">
+              {{environment.API_URL}}/key/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 4 -->
+    <div class="d-flex gap-3 mb-0">
+      <div class="step-badge">4</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Выберите сервер</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">После сохранения в списке появятся доступные серверы.</li>
+          <li class="mb-2">Нажмите на нужный сервер, чтобы выбрать его.
+            Если серверов несколько — выберите ближайший к вам по географии.</li>
+        </ol>
+        <!-- СКРИНШОТ: список серверов в Happ после добавления подписки -->
+        <app-screenshot
+          src="assets/instruction/ios/step4-server-list.jpg"
+          alt="Список серверов после добавления подписки — выберите нужный"></app-screenshot>
+      </div>
+    </div>
+
+    <hr class="step-divider">
+
+    <!-- Шаг 5 -->
+    <div class="d-flex gap-3 mb-4">
+      <div class="step-badge">5</div>
+      <div class="step-content flex-grow-1">
+        <h5 class="fw-semibold mb-2">Подключитесь к VPN</h5>
+        <ol class="ps-3 text-muted mb-3">
+          <li class="mb-2">На главном экране нажмите большую кнопку
+            <strong>«Подключить»</strong> (или переключите тумблер).</li>
+          <li class="mb-2">iOS покажет запрос разрешения на добавление
+            VPN-конфигурации — нажмите <strong>«Разрешить»</strong>.</li>
+          <li class="mb-2">При необходимости введите Face ID или пароль
+            для подтверждения.</li>
+          <li class="mb-2">Когда в строке состояния появится значок
+            <strong><code>VPN</code></strong> — соединение установлено! ✅</li>
+        </ol>
+        <div class="row g-3 mb-0">
+          <div class="col-6">
+            <!-- СКРИНШОТ: системный диалог iOS «Happ» хочет добавить конфигурации VPN — кнопка «Разрешить» -->
+            <app-screenshot
+              src="assets/instruction/ios/step5-vpn-permission.jpg"
+              alt="Системный запрос iOS — «Разрешить» для VPN"></app-screenshot>
+          </div>
+          <div class="col-6">
+            <!-- СКРИНШОТ: главный экран Happ в состоянии «Подключено» — зелёный индикатор, значок VPN в статусбаре -->
+            <app-screenshot
+              src="assets/instruction/ios/step5-connected.jpg"
+              alt="Happ: статус «Подключено» + VPN в статусбаре"></app-screenshot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-instruction-success></app-instruction-success>
+
+  </div>
+</div>
